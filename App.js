@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Alert, StyleSheet, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native';
+import { Input, Text, View, Alert, StyleSheet, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import Test from "./components/Test"
 import SearchDetails from "./components/SearchDetails.js"
 import CheckInSearch from './components/CheckInSearch.js';
 
-import DataDetails from './components/DataDetails.js';
+
 import CheckIn from './components/CheckIn.js';
+import CheckInConfirm from './components/CheckInConfirm.js';
 
 import CheckOutSearch from './components/CheckOutSearch.js';
 import CheckOut from './components/CheckOut.js';
+import CheckOutConfirm from './components/CheckOutConfirm.js';
 
 function HomeScreen({ navigation }) {
   return (
@@ -35,13 +37,15 @@ function HomeScreen({ navigation }) {
         <Text style={styles.buttonText}>Asset Details</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => alert('Hello, world!')} style={styles.button}>
-        <Text style={styles.buttonText}>Test 1</Text>
-      </TouchableOpacity>
 
+      <TouchableOpacity onPress={() => navigation.navigate('Test')} style={styles.button}>
+        <Text style={styles.buttonText}>Delete me please </Text>
+      </TouchableOpacity>
+  
       <TouchableOpacity onPress={() => alert('Hello, world!')} style={styles.button}>
         <Text style={styles.buttonText}>Test 2</Text>
       </TouchableOpacity>
+      
       
       
 
@@ -56,7 +60,7 @@ function HomeScreen({ navigation }) {
 const Stack = createNativeStackNavigator();
 
 const YourApp = () => {
-
+/*
 var test = 'snipeit-test'
 //var prod = 'vminventar.schnupp.de'
 
@@ -70,7 +74,7 @@ var test = 'snipeit-test'
     })
     .catch((error) => {
       console.log('error produced' + error);
-    });
+    });*/
 
   return (
 
@@ -78,11 +82,14 @@ var test = 'snipeit-test'
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="SearchDetails" component={SearchDetails} />
-        <Stack.Screen name="DataDetails" component={DataDetails} />
+       
         <Stack.Screen name="CheckInSearch" component={CheckInSearch} />
+        <Stack.Screen name="Test" component={Test} />
         <Stack.Screen name="CheckIn" component={CheckIn} />
+        <Stack.Screen name="CheckInConfirm" component={CheckInConfirm} />
         <Stack.Screen name="CheckOutSearch" component={CheckOutSearch} />
         <Stack.Screen name="CheckOut" component={CheckOut} />
+        <Stack.Screen name="CheckOutConfirm" component={CheckOutConfirm} />
         
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import {  TextInput, Text, Image, View, Dimensions, StyleSheet, TouchableOpacity } from "react-native";
 import { Button } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
+
 import axios from "axios"
 const CheckOut = ({ route }) => {
   const [name, setName] = React.useState("");
@@ -22,7 +24,7 @@ const CheckOut = ({ route }) => {
     const AuthStr = "Bearer ".concat(USER_TOKEN);
     console.log("AuthStr", AuthStr);
     axios
-      .get(`http://snipeit-test/api/v1/hardware/${number}`, {
+      .get(`http://vminventar.schnupp.de/api/v1/hardware/${number}`, {
         headers: {
           Authorization: AuthStr,
           Accept: "application/json",
@@ -57,6 +59,7 @@ const CheckOut = ({ route }) => {
     }
 // add a loader here
   }, []);
+  const navigation = useNavigation();
   return (
     <View>
       <Text>
@@ -113,6 +116,14 @@ const CheckOut = ({ route }) => {
           {Ownedby}
         </Text>
       </View>
+      <Button
+  onPress={() =>
+          navigation.navigate('CheckOutConfirm',  {Ownedby} )
+        }
+  title="Check Out"
+  color="#841584"
+  accessibilityLabel="Learn more about this purple button"
+/>
     </View>
   );
 };

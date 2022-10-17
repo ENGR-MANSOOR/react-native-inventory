@@ -35,7 +35,7 @@ const DataDetails = ({ route }) => {
       })
       .then((response) => {
         // If request is good...
-        console.log("date from dzanmic", response.data);
+        console.log("date from dyanmic", response.data);
         setName(response.data.name)
         setSerial(response.data.serial)
         setCreatedAt(response.data.created_at.formatted)
