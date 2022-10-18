@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Test from "./components/Test"
 import SearchDetails from "./components/SearchDetails.js"
+import DataDetails from './components/DataDetails';
 import CheckInSearch from './components/CheckInSearch.js';
 
 
@@ -82,7 +83,7 @@ var test = 'snipeit-test'
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="SearchDetails" component={SearchDetails} />
-       
+        <Stack.Screen name="DataDetails" component={DataDetails} />
         <Stack.Screen name="CheckInSearch" component={CheckInSearch} />
         <Stack.Screen name="Test" component={Test} />
         <Stack.Screen name="CheckIn" component={CheckIn} />
