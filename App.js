@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Input, Text, View, Alert, StyleSheet, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native';
-import { Button } from 'react-native-elements';
+import { ScrollView, Input, Text, View, Alert, StyleSheet, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Divider, Button } from '@rneui/themed';
 import axios from 'axios';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -21,35 +21,86 @@ import CheckOutConfirm from './components/CheckOutConfirm.js';
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, padding: 24 }}>
+      <ScrollView>
+        <Text style={styles.title}>
+          Snipe-IT inventor Management system
+        </Text>
 
-      <Text style={styles.title}>
-        Snipe-IT inventor Management system
-      </Text>
-      <TouchableOpacity onPress={() => navigation.navigate('CheckInSearch')} style={styles.button}>
-        <Text style={styles.buttonText}>Check In</Text>
-        { }
-      </TouchableOpacity>
+        <Button
+          onPress={() => navigation.navigate('CheckInSearch')}
+          icon={
+            <Icon
+              name="arrow-right"
+              size={40}
+              color="white"
+            />
+          }
+          iconRight
+          title="Check In"
+        />
+        <Divider width={15} />
+        <Button
+          onPress={() => navigation.navigate('CheckOutSearch')}
+          icon={
+            <Icon
+              name="arrow-right"
+              size={40}
+              color="white"
+            />
+          }
+          iconRight
+          title="Check Out"
+        />
 
-      <TouchableOpacity  title="Go to Details... again" onPress={() => navigation.navigate('CheckOutSearch')} style={styles.button}>
-        <Text style={styles.buttonText}>Check Out</Text>
-      </TouchableOpacity>
+        <Divider width={15} />
+        <Button
+          onPress={() => navigation.navigate('SearchDetails')}
+          icon={
+            <Icon
+              name="arrow-right"
+              size={40}
+              color="white"
+            />
+          }
+          iconRight
+          title="Asset Details"
+        />
 
-      <TouchableOpacity onPress={() => navigation.navigate('SearchDetails')} style={styles.button}>
-        <Text style={styles.buttonText}>Asset Details</Text>
-      </TouchableOpacity>
+        <Divider width={15} />
+        <Button
+          onPress={() => navigation.navigate('Test')}
+          icon={
+            <Icon
+              name="arrow-right"
+              size={40}
+              color="white"
+            />
+          }
+          iconRight
+          title="Test Page"
+        />
+
+        <Divider width={15} />
+        <Button
+          onPress={() => alert('Hello, world!')}
+          icon={
+            <Icon
+              name="arrow-right"
+              size={40}
+              color="white"
+            />
+          }
+          iconRight
+          title="Test 2"
+        />
 
 
-      <TouchableOpacity onPress={() => navigation.navigate('Test')} style={styles.button}>
-        <Text style={styles.buttonText}>Delete me please </Text>
-      </TouchableOpacity>
-  
-      <TouchableOpacity onPress={() => alert('Hello, world!')} style={styles.button}>
-        <Text style={styles.buttonText}>Test 2</Text>
-      </TouchableOpacity>
-      
-      
-      
 
+
+
+
+
+      </ScrollView>
     </View>
   );
 }
@@ -61,21 +112,21 @@ function HomeScreen({ navigation }) {
 const Stack = createNativeStackNavigator();
 
 const YourApp = () => {
-/*
-var test = 'snipeit-test'
-//var prod = 'vminventar.schnupp.de'
-
-  const USER_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMzhmMTYwMDhlMGQ2NDZlNzQxMDAzMGQxNTM3ZWI1MWU2MmIzZDk3NzVlZmU1OTZlMTZiMzA3YWM3Y2Y2NDNkY2ZkYTIxZTJmNjdmOTgyMzQiLCJpYXQiOjE2NjE0MjYxNjEsIm5iZiI6MTY2MTQyNjE2MSwiZXhwIjoyMTM0ODExNzYwLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.pWF14zSaBslu3FFTRXPFosJkN1y-cERRwljZNYCPbg3jRCOgThVz0dldLVehu9tDNllzi6jQqhplcN5HlpIWuz0Jp__5JUKXBNrU782JqZadoChuxRNILAkzT7EJwOXuOtjS9Ij0zO5GMfKUc01I5RsDqD2ljcaQFFt_Mjn0lE6OGopj64JBl921BoS05i_TEty2n6kPxkWlQVt3HNGhs-f_RlHMaBlWQpOTf5_oFowjD3SwtH2ERw_E_oJIpS_RH_5fCbeRDvTZYr4tCPzRUYXoA4q4-hEpTH9newbKxATzwhZ9IB-9UXsnwVfe8owuY79okYkrTo4KYj2ynk1Se6tCT0tdwaqNwqYDzwzS3P3jmmneUmCrwXeyinX05KtIslK02e6q_Zud9Q7NSJq58hTy86HDIlMX2shhagVqZ0UchhSUbeCaM8Kc27zLC54KIJE_R25izBACw0wZLVYp2-OU9rgSK0OPl33DZ8VykHQtyXTVArV1bUoJxZHZqcpnUKmb2cG90K83CYZJFQ3rI_bPRfH1aIdqDM8MYAfDwxgtRBzp8tPF5uMUSKAifbFHMpC-Si90sF0uvVpYaKg9Ag8rqLXSQdFESwDim6149VFCzSJES9hh_X0S738PRShSCQDK-wJXN7M5-vP-XxezoB07ZGxpJJzeo9lAiyLC58Q'
-  const AuthStr = 'Bearer '.concat(USER_TOKEN);
-  console.log('AuthStr', AuthStr)
-  axios.get('http://test/api/v1/hardware/725', { headers: { Authorization: AuthStr, Accept: 'application/json', "Content-Type": 'application/json' } })
-    .then(response => {
-      // If request is good...
-      console.log("APP CONSOLE",response.data);
-    })
-    .catch((error) => {
-      console.log('error produced' + error);
-    });*/
+  /*
+  var test = 'snipeit-test'
+  //var prod = 'vminventar.schnupp.de'
+  
+    const USER_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMzhmMTYwMDhlMGQ2NDZlNzQxMDAzMGQxNTM3ZWI1MWU2MmIzZDk3NzVlZmU1OTZlMTZiMzA3YWM3Y2Y2NDNkY2ZkYTIxZTJmNjdmOTgyMzQiLCJpYXQiOjE2NjE0MjYxNjEsIm5iZiI6MTY2MTQyNjE2MSwiZXhwIjoyMTM0ODExNzYwLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.pWF14zSaBslu3FFTRXPFosJkN1y-cERRwljZNYCPbg3jRCOgThVz0dldLVehu9tDNllzi6jQqhplcN5HlpIWuz0Jp__5JUKXBNrU782JqZadoChuxRNILAkzT7EJwOXuOtjS9Ij0zO5GMfKUc01I5RsDqD2ljcaQFFt_Mjn0lE6OGopj64JBl921BoS05i_TEty2n6kPxkWlQVt3HNGhs-f_RlHMaBlWQpOTf5_oFowjD3SwtH2ERw_E_oJIpS_RH_5fCbeRDvTZYr4tCPzRUYXoA4q4-hEpTH9newbKxATzwhZ9IB-9UXsnwVfe8owuY79okYkrTo4KYj2ynk1Se6tCT0tdwaqNwqYDzwzS3P3jmmneUmCrwXeyinX05KtIslK02e6q_Zud9Q7NSJq58hTy86HDIlMX2shhagVqZ0UchhSUbeCaM8Kc27zLC54KIJE_R25izBACw0wZLVYp2-OU9rgSK0OPl33DZ8VykHQtyXTVArV1bUoJxZHZqcpnUKmb2cG90K83CYZJFQ3rI_bPRfH1aIdqDM8MYAfDwxgtRBzp8tPF5uMUSKAifbFHMpC-Si90sF0uvVpYaKg9Ag8rqLXSQdFESwDim6149VFCzSJES9hh_X0S738PRShSCQDK-wJXN7M5-vP-XxezoB07ZGxpJJzeo9lAiyLC58Q'
+    const AuthStr = 'Bearer '.concat(USER_TOKEN);
+    console.log('AuthStr', AuthStr)
+    axios.get('http://test/api/v1/hardware/725', { headers: { Authorization: AuthStr, Accept: 'application/json', "Content-Type": 'application/json' } })
+      .then(response => {
+        // If request is good...
+        console.log("APP CONSOLE",response.data);
+      })
+      .catch((error) => {
+        console.log('error produced' + error);
+      });*/
 
   return (
 
@@ -91,7 +142,7 @@ var test = 'snipeit-test'
         <Stack.Screen name="CheckOutSearch" component={CheckOutSearch} />
         <Stack.Screen name="CheckOut" component={CheckOut} />
         <Stack.Screen name="CheckOutConfirm" component={CheckOutConfirm} />
-        
+
       </Stack.Navigator>
     </NavigationContainer>
 

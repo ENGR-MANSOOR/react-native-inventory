@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import {  TextInput, Text, Image, View, Dimensions, StyleSheet, TouchableOpacity } from "react-native";
-import { Button } from 'react-native-elements';
+import {  ScrollView,TextInput, Image, View, Dimensions, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, Card, Button } from '@rneui/themed';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from "axios"
 const DataDetails = ({ route }) => {
   const [name, setName] = React.useState("");
@@ -8,7 +9,7 @@ const DataDetails = ({ route }) => {
   const [createdAt, setCreatedAt] = React.useState("");
   const [assetTag, setAssetTag] = React.useState("");
   const [modelNumber, setModelNumber] = React.useState("");
-  const [image, setImage] = React.useState("");
+  const [Image, setImage] = React.useState("");
   const [modelID, setModelID] = React.useState("");
   const [modelName, setModelName] = React.useState("");
   const [Ownedby, setOwnedby] = React.useState("");
@@ -92,59 +93,66 @@ const DataDetails = ({ route }) => {
   }, []);
   return (
     <View>
-      <Text>
-        Try display me ! 🎉
-      </Text>
-
       <View>
-        <Text style={styles.cardContainer}>
-          Name:
-        </Text>
-        <Text> {name} </Text>
-        <Text style={styles.cardContainer}>
+      <ScrollView>
+        <Card>
+          <Card.Title>Details</Card.Title>
+          <Card.Divider />
+          <Card.Image
+            style={{ padding: 0 }}
+            source={{
+              uri: Image,
+            }}
+          />
+          
+
+          <Text style={style.subHeader}>
+            Name:
+          </Text>
+          <Text> {name} </Text>
+          <Text style={style.subHeader}>
           Serial Number:
         </Text>
         <Text> {serial} </Text>
-        <Text style={styles.cardContainer}>
+        <Text style={style.subHeader}>
           Created At:
         </Text>
         <Text>
           {createdAt}
         </Text>
-        <Text style={styles.cardContainer}>
+        <Text style={style.subHeader}>
           Asset Tag:
         </Text>
         <Text>
           {assetTag}
         </Text>
-        <Text style={styles.cardContainer}>
+        <Text style={style.subHeader}>
           Model Number:
         </Text>
         <Text>
           {modelNumber}
         </Text>
-        <Text style={styles.cardContainer}>
-          Image:
-        </Text>
-        <Image source={image} />
-        <Text style={styles.cardContainer}>
+        
+        <Text style={style.subHeader}>
           Model with ID :
         </Text>
         <Text>
           {modelID}
         </Text>
-        <Text style={styles.cardContainer}>
+        <Text style={style.subHeader}>
           Model with Name :
         </Text>
         <Text>
           {modelName}
         </Text>
-        <Text style={styles.cardContainer}>
+        <Text style={style.subHeader}>
           Owned By :
         </Text>
         <Text>
           {Ownedby}
         </Text>
+        </Card>
+        </ScrollView>
       </View>
     </View>
   );
@@ -159,5 +167,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 })
+const style = StyleSheet.create({
+  subHeader: {
+    backgroundColor: "#2089dc",
+    color: "white",
+    textAlign: "center",
+    paddingVertical: 5,
+    marginBottom: 10
+  }
+});
 
 export default DataDetails;

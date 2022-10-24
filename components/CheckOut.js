@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import {  TextInput, Text, Image, View, Dimensions, StyleSheet, TouchableOpacity } from "react-native";
-import { Button } from 'react-native-elements';
+import {  TextInput, ScrollView, View, Dimensions, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, Card, Button, Image } from '@rneui/themed';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 
 import axios from "axios"
@@ -10,7 +11,7 @@ const CheckOut = ({ route }) => {
   const [createdAt, setCreatedAt] = React.useState("");
   const [assetTag, setAssetTag] = React.useState("");
   const [modelNumber, setModelNumber] = React.useState("");
-  const [image, setImage] = React.useState("");
+  const [Image, setImage] = React.useState("");
   const [modelID, setModelID] = React.useState("");
   const [modelName, setModelName] = React.useState("");
   const [Ownedby, setOwnedby] = React.useState("");
@@ -62,80 +63,105 @@ const CheckOut = ({ route }) => {
   const navigation = useNavigation();
   return (
     <View>
-      <Text>
-        Try display me ! 🎉
-      </Text>
-
       <View>
-        <Text style={styles.cardContainer}>
-          Name:
-        </Text>
-        <Text> {name} </Text>
-        <Text style={styles.cardContainer}>
+      <ScrollView>
+        <Card>
+          <Card.Title>Details</Card.Title>
+          <Card.Divider />
+          <Card.Image
+            style={{ padding: 0 }}
+            source={{
+              uri: Image,
+            }}
+          />
+          
+
+          <Text style={style.subHeader}>
+            Name:
+          </Text>
+          <Text> {name} </Text>
+          <Text style={style.subHeader}>
           Serial Number:
         </Text>
         <Text> {serial} </Text>
-        <Text style={styles.cardContainer}>
+        <Text style={style.subHeader}>
           Created At:
         </Text>
         <Text>
           {createdAt}
         </Text>
-        <Text style={styles.cardContainer}>
+        <Text style={style.subHeader}>
           Asset Tag:
         </Text>
         <Text>
           {assetTag}
         </Text>
-        <Text style={styles.cardContainer}>
+        <Text style={style.subHeader}>
           Model Number:
         </Text>
         <Text>
           {modelNumber}
         </Text>
-        <Text style={styles.cardContainer}>
-          Image:
-        </Text>
-        <Image source={image} />
-        <Text style={styles.cardContainer}>
+        
+        <Text style={style.subHeader}>
           Model with ID :
         </Text>
         <Text>
           {modelID}
         </Text>
-        <Text style={styles.cardContainer}>
+        <Text style={style.subHeader}>
           Model with Name :
         </Text>
         <Text>
           {modelName}
         </Text>
-        <Text style={styles.cardContainer}>
+        <Text style={style.subHeader}>
           Owned By :
         </Text>
         <Text>
           {Ownedby}
         </Text>
-      </View>
-      <Button
-  onPress={() =>
+          <Button
+          onPress={() =>
           navigation.navigate('CheckOutConfirm',  {Ownedby, assetTag} )
         }
-  title="Check Out"
-  color="#841584"
-  accessibilityLabel="Learn more about this purple button"
-/>
+            icon={
+              <Icon
+                name="code"
+                color="#ffffff"
+                iconStyle={{ marginRight: 10 }}
+              />
+            }
+            buttonStyle={{
+              borderRadius: 0,
+              marginLeft: 0,
+              marginRight: 0,
+              marginBottom: 0,
+            }}
+            title="CHECK OUT"
+          />
+        </Card>
+        </ScrollView>
+      </View>
     </View>
   );
 };
 
 const deviceWidth= Math.round(Dimensions.get('window').width);
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   cardContainer: { width: deviceWidth, backgroundColor: '#a29bfe'},
 
   ImageBackground: {
     width: "50%",
     alignItems: "center",
   },
+  subHeader: {
+    backgroundColor: "#2089dc",
+    color: "white",
+    textAlign: "center",
+    paddingVertical: 5,
+    marginBottom: 10
+  }
 })
 
 export default CheckOut;
