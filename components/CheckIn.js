@@ -19,7 +19,10 @@ const CheckIn = ({ route }) => {
   const [modelID, setModelID] = React.useState("");
   const [modelName, setModelName] = React.useState("");
   const [Ownedby, setOwnedby] = React.useState("");
-
+  const [datev, setDatev] = React.useState("");
+  const [checkNumber, setCheckNumber] = React.useState("");
+  const [note, setNote] = React.useState("");
+  
 
 
   const handleSubmit = async (number) => {
@@ -38,17 +41,28 @@ const CheckIn = ({ route }) => {
       })
       .then((response) => {
         // If request is good...
-        console.log("date from dzanmic", response.data);
+        //console.log("date from dyanmic in checkin.js", response.data);
+        console.log("data from dyanmic in checkin.js now", response.data);
+        setNote(response.data.notes)
+        setDatev(response.data.custom_fields.Datev_Nummer.value)
+        setCheckNumber(response.data.custom_fields.Pruefnummer_Elektrogeraete.value)
         setName(response.data.name)
         setSerial(response.data.serial)
         setCreatedAt(response.data.created_at.formatted)
         setAssetTag(response.data.asset_tag)
         setModelNumber(response.data.model_number)
         setImage(response.data.image)
-        console.log("date from image", response.data.image);
+        console.log("data from image", response.data.image);
         setModelID(response.data.model.id)
         setModelName(response.data.model.name)
         setOwnedby(response.data.assigned_to.name)
+        
+        
+        console.log("setCheckNumber", response.data.custom_fields.Pruefnummer_Elektrogeraete.value)
+        
+        console.log("setDatev")
+        
+        
       })
       .catch((error) => {
         console.log("error produced kabeer" + error);
@@ -56,6 +70,8 @@ const CheckIn = ({ route }) => {
 
   };
 console.log("image", Image)
+console.log("Datev is here", datev)
+
 
   /*const CheckInPost = async (number) => {
     const USER_TOKEN =
@@ -144,6 +160,24 @@ console.log("image", Image)
         </Text>
         <Text>
           {Ownedby}
+        </Text>
+        <Text style={style.subHeader}>
+         Datev_Nummer :
+        </Text>
+        <Text>
+          {datev}
+        </Text>
+        <Text style={style.subHeader}>
+        Pruefnummer_Elektrogeraete :
+        </Text>
+        <Text>
+          {checkNumber}
+        </Text>
+        <Text style={style.subHeader}>
+        Note :
+        </Text>
+        <Text>
+          {note}
         </Text>
           <Button
            onPress={() =>

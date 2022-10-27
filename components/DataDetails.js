@@ -13,6 +13,9 @@ const DataDetails = ({ route }) => {
   const [modelID, setModelID] = React.useState("");
   const [modelName, setModelName] = React.useState("");
   const [Ownedby, setOwnedby] = React.useState("");
+  const [datev, setDatev] = React.useState("");
+  const [checkNumber, setCheckNumber] = React.useState("");
+  const [note, setNote] = React.useState("");
 
 
 
@@ -37,6 +40,9 @@ const DataDetails = ({ route }) => {
       .then((response) => {
         // If request is good...
         console.log("date from dyanmic", response.data);
+        setNote(response.data.notes)
+        setDatev(response.data.custom_fields.Datev_Nummer.value)
+        setCheckNumber(response.data.custom_fields.Pruefnummer_Elektrogeraete.value)
         setName(response.data.name)
         setSerial(response.data.serial)
         setCreatedAt(response.data.created_at.formatted)
@@ -47,12 +53,15 @@ const DataDetails = ({ route }) => {
         setModelID(response.data.model.id)
         setModelName(response.data.model.name)
         setOwnedby(response.data.assigned_to.name)
+        
+        console.log("setNote", response.data.notes )
       })
       .catch((error) => {
         console.log("error produced kabeer" + error);
       });
 
   };
+  console.log("set notes outside", note)
   
 
 /*
@@ -150,6 +159,24 @@ const DataDetails = ({ route }) => {
         </Text>
         <Text>
           {Ownedby}
+        </Text>
+        <Text style={style.subHeader}>
+         Datev_Nummer :
+        </Text>
+        <Text>
+          {datev}
+        </Text>
+        <Text style={style.subHeader}>
+        Pruefnummer_Elektrogeraete :
+        </Text>
+        <Text>
+          {checkNumber}
+        </Text>
+        <Text style={style.subHeader}>
+        Note :
+        </Text>
+        <Text>
+          {note}
         </Text>
         </Card>
         </ScrollView>

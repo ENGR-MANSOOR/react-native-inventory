@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, Input, Text, View, Alert, StyleSheet, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+//import Icon from 'react-native-vector-icons/FontAwesome';
+import { Icon } from 'react-native-elements'
 import { Divider, Button } from '@rneui/themed';
 import axios from 'axios';
 import { NavigationContainer } from '@react-navigation/native';
@@ -18,6 +19,10 @@ import CheckOutSearch from './components/CheckOutSearch.js';
 import CheckOut from './components/CheckOut.js';
 import CheckOutConfirm from './components/CheckOutConfirm.js';
 
+import EditAssetSearch from './components/EditAssetSearch';
+import EditAssetDetails from './components/EditAssetDetails';
+import EditAssetConfirm from './components/EditAssetConfirm';
+
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, padding: 24 }}>
@@ -30,7 +35,7 @@ function HomeScreen({ navigation }) {
           onPress={() => navigation.navigate('CheckInSearch')}
           icon={
             <Icon
-              name="arrow-right"
+              name="login"
               size={40}
               color="white"
             />
@@ -43,7 +48,7 @@ function HomeScreen({ navigation }) {
           onPress={() => navigation.navigate('CheckOutSearch')}
           icon={
             <Icon
-              name="arrow-right"
+              name="logout"
               size={40}
               color="white"
             />
@@ -57,7 +62,7 @@ function HomeScreen({ navigation }) {
           onPress={() => navigation.navigate('SearchDetails')}
           icon={
             <Icon
-              name="arrow-right"
+              name="list"
               size={40}
               color="white"
             />
@@ -82,7 +87,7 @@ function HomeScreen({ navigation }) {
 
         <Divider width={15} />
         <Button
-          onPress={() => alert('Hello, world!')}
+            onPress={() => navigation.navigate('EditAssetSearch')}
           icon={
             <Icon
               name="arrow-right"
@@ -91,7 +96,7 @@ function HomeScreen({ navigation }) {
             />
           }
           iconRight
-          title="Test 2"
+          title="Edit Asset"
         />
 
 
@@ -142,6 +147,10 @@ const YourApp = () => {
         <Stack.Screen name="CheckOutSearch" component={CheckOutSearch} />
         <Stack.Screen name="CheckOut" component={CheckOut} />
         <Stack.Screen name="CheckOutConfirm" component={CheckOutConfirm} />
+        <Stack.Screen name="EditAssetSearch" component={EditAssetSearch} />
+        <Stack.Screen name="EditAssetDetails" component={EditAssetDetails} />
+        <Stack.Screen name="EditAssetConfirm" component={EditAssetConfirm} />
+        
 
       </Stack.Navigator>
     </NavigationContainer>

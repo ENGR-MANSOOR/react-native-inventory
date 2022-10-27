@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
-import {  TextInput, ScrollView, View, Dimensions, StyleSheet, TouchableOpacity } from "react-native";
-import { Text, Card, Button, Image } from '@rneui/themed';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { View, Dimensions, StyleSheet, ScrollView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import { Text, Card, Button, Image } from '@rneui/themed';
+import { Icon } from 'react-native-elements'
+//import { Image } from "@rneui/themed";
+
+
 
 import axios from "axios"
-const CheckOut = ({ route }) => {
+
+const EditAssetDetails = ({ route }) => {
   const [name, setName] = React.useState("");
   const [serial, setSerial] = React.useState("");
   const [createdAt, setCreatedAt] = React.useState("");
@@ -18,7 +22,6 @@ const CheckOut = ({ route }) => {
   const [datev, setDatev] = React.useState("");
   const [checkNumber, setCheckNumber] = React.useState("");
   const [note, setNote] = React.useState("");
-  
 
 
 
@@ -33,12 +36,12 @@ const CheckOut = ({ route }) => {
         headers: {
           Authorization: AuthStr,
           Accept: "application/json",
-          "Content-Type": "application/json",
+
         },
       })
       .then((response) => {
         // If request is good...
-        console.log("date from dzanmic", response.data);
+        console.log("date from Edit asset details", response.data);
         setNote(response.data.notes)
         setDatev(response.data.custom_fields.Datev_Nummer.value)
         setCheckNumber(response.data.custom_fields.Pruefnummer_Elektrogeraete.value)
@@ -58,19 +61,39 @@ const CheckOut = ({ route }) => {
       });
 
   };
+console.log("image", Image)
+
+  /*const CheckInPost = async (number) => {
+    const USER_TOKEN =
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMzhmMTYwMDhlMGQ2NDZlNzQxMDAzMGQxNTM3ZWI1MWU2MmIzZDk3NzVlZmU1OTZlMTZiMzA3YWM3Y2Y2NDNkY2ZkYTIxZTJmNjdmOTgyMzQiLCJpYXQiOjE2NjE0MjYxNjEsIm5iZiI6MTY2MTQyNjE2MSwiZXhwIjoyMTM0ODExNzYwLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.pWF14zSaBslu3FFTRXPFosJkN1y-cERRwljZNYCPbg3jRCOgThVz0dldLVehu9tDNllzi6jQqhplcN5HlpIWuz0Jp__5JUKXBNrU782JqZadoChuxRNILAkzT7EJwOXuOtjS9Ij0zO5GMfKUc01I5RsDqD2ljcaQFFt_Mjn0lE6OGopj64JBl921BoS05i_TEty2n6kPxkWlQVt3HNGhs-f_RlHMaBlWQpOTf5_oFowjD3SwtH2ERw_E_oJIpS_RH_5fCbeRDvTZYr4tCPzRUYXoA4q4-hEpTH9newbKxATzwhZ9IB-9UXsnwVfe8owuY79okYkrTo4KYj2ynk1Se6tCT0tdwaqNwqYDzwzS3P3jmmneUmCrwXeyinX05KtIslK02e6q_Zud9Q7NSJq58hTy86HDIlMX2shhagVqZ0UchhSUbeCaM8Kc27zLC54KIJE_R25izBACw0wZLVYp2-OU9rgSK0OPl33DZ8VykHQtyXTVArV1bUoJxZHZqcpnUKmb2cG90K83CYZJFQ3rI_bPRfH1aIdqDM8MYAfDwxgtRBzp8tPF5uMUSKAifbFHMpC-Si90sF0uvVpYaKg9Ag8rqLXSQdFESwDim6149VFCzSJES9hh_X0S738PRShSCQDK-wJXN7M5-vP-XxezoB07ZGxpJJzeo9lAiyLC58Q";
+    const AuthStr = "Bearer ".concat(USER_TOKEN);
+    console.log("AuthStr", AuthStr);
+    axios
+      .post(`http://vminventar.schnupp.de/api/v1/hardware/${number}`, {
+        headers: {
+          Authorization: AuthStr,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      
+
+  };*/
 
   useEffect(async () => {
     const number = route?.params.number
     console.log('name', name)
     if (number) {
-       handleSubmit(number)
+      handleSubmit(number)
     }
-// add a loader here
+
+    // add a loader here
   }, []);
   const navigation = useNavigation();
   return (
     <View>
       <View>
+
       <ScrollView>
         <Card>
           <Card.Title>Details</Card.Title>
@@ -147,12 +170,12 @@ const CheckOut = ({ route }) => {
           {note}
         </Text>
           <Button
-          onPress={() =>
-          navigation.navigate('CheckOutConfirm',  {Ownedby, assetTag} )
+           onPress={() =>
+          navigation.navigate('EditAssetConfirm', { assetTag, Ownedby })
         }
             icon={
               <Icon
-                name="code"
+                name="login"
                 color="#ffffff"
                 iconStyle={{ marginRight: 10 }}
               />
@@ -163,23 +186,29 @@ const CheckOut = ({ route }) => {
               marginRight: 0,
               marginBottom: 0,
             }}
-            title="CHECK OUT"
+            title="Edit Asset"
           />
         </Card>
         </ScrollView>
       </View>
+      
+
     </View>
   );
 };
 
-const deviceWidth= Math.round(Dimensions.get('window').width);
-const style = StyleSheet.create({
-  cardContainer: { width: deviceWidth, backgroundColor: '#a29bfe'},
+const deviceWidth = Math.round(Dimensions.get('window').width);
+const styles = StyleSheet.create({
+  cardContainer: { width: deviceWidth, backgroundColor: '#a29bfe' },
 
   ImageBackground: {
     width: "50%",
     alignItems: "center",
   },
+})
+
+
+const style = StyleSheet.create({
   subHeader: {
     backgroundColor: "#2089dc",
     color: "white",
@@ -187,6 +216,6 @@ const style = StyleSheet.create({
     paddingVertical: 5,
     marginBottom: 10
   }
-})
+});
 
-export default CheckOut;
+export default EditAssetDetails;

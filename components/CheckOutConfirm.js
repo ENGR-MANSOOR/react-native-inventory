@@ -2,50 +2,6 @@ import React from "react";
 import { TextInput, Text, Image, View, Dimensions, StyleSheet, TouchableOpacity, Button, FlatList } from "react-native";
 //import SelectDropdown from 'react-native-select-dropdown';
 import SearchableDropdown from 'react-native-searchable-dropdown';
-import SelectList from 'react-native-dropdown-select-list';
-import { Dropdown } from 'react-native-element-dropdown';
-import SelectDropdown from 'react-native-select-dropdown'
-const {width} = Dimensions.get('window');
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-
-const countries = [{id:10,name:"Egypt"}, {id:20,name:"Canada"}, {id:30,name:"Austraila"}]
-
-var kabeer = [
-  {
-    id: 1,
-    name: 'JavaScript',
-  },
-  {
-    id: 2,
-    name: 'Java',
-  },
-  {
-    id: 3,
-    name: 'Ruby',
-  },
-  {
-    id: 4,
-    name: 'React Native',
-  },
-  {
-    id: 5,
-    name: 'PHP',
-  },
-  {
-    id: 6,
-    name: 'Python',
-  },
-  {
-    id: 7,
-    name: 'Go',
-  },
-  {
-    id: 8,
-    name: 'Swift',
-  },
-];
-
 
 var axios = require('axios');
 

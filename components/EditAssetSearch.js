@@ -1,7 +1,6 @@
-import {  Image, View, Dimensions, StyleSheet, TouchableOpacity } from "react-native";
+import { TextInput, Image, View, Dimensions, StyleSheet, TouchableOpacity } from "react-native";
 import { Text, Input, Icon, Button } from '@rneui/themed';
 import React from "react"
-import TextInput from "react-native-input-validator";
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -9,7 +8,7 @@ import { ScreenContainer } from "react-native-screens";
 
 const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
-function CheckInSearch({ navigation }) {
+function EditAssetSearch({ navigation }) {
   const [number, onChangeNumber] = React.useState(null);
 
   return (
@@ -25,10 +24,10 @@ function CheckInSearch({ navigation }) {
       />
 
       <Button
-        onPress={() => navigation.push('CheckIn', {
+        onPress={() => navigation.push('EditAssetDetails', {
           number: number
         })}
-        title="CHECK IN"
+        title="Edit Asset Details"
         iconContainerStyle={{ marginRight: 10 }}
         titleStyle={{ fontWeight: '700' }}
         buttonStyle={{
@@ -80,4 +79,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default CheckInSearch;
+export default EditAssetSearch;
