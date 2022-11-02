@@ -30,11 +30,28 @@ const CheckInConfirm = ({ navigation, route }) => {
     console.log("url", config.url)
     axios(config)
       .then(function (response) {
-        alert(response.data.messages)
+        Alert.alert(
+          "Erfolgreich",
+          response.data.messages,
+          [
+            
+            { text: "OK", onPress: () => navigation.push('Home', {
+            }) }
+          ]
+        );
         console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
         console.log(error);
+        Alert.alert(
+          "Fehlgeschlagen",
+          error,
+          [
+            
+            { text: "OK", onPress: () => navigation.push('Home', {
+            }) }
+          ]
+        );
       });
 
   }

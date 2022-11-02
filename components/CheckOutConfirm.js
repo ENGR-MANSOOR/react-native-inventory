@@ -1,5 +1,6 @@
 import React from "react";
 import { TextInput, Text, Image, View, Dimensions, StyleSheet, TouchableOpacity, Button, FlatList } from "react-native";
+import { Icon } from 'react-native-elements'
 //import SelectDropdown from 'react-native-select-dropdown';
 import SearchableDropdown from 'react-native-searchable-dropdown';
 
@@ -116,7 +117,7 @@ const CheckOutConfirm = ({ navigation, route }) => {
 
 
 
-
+/*
 
     const CheckOutConfirmFunction = async () => {
         
@@ -140,17 +141,36 @@ const CheckOutConfirm = ({ navigation, route }) => {
         console.log("URL Checkout",config.url)
         axios(config)
             .then(function (response) {
+              alert("Response Messages", response.data.messages)
                 console.log(JSON.stringify(response.data));
                 console.log("check out message", response.data.messages)
+                Alert.alert(
+                  "Erfolgreich",
+                  response.data.messages,
+                  [
+                    
+                    { text: "OK", onPress: () => navigation.push('Home', {
+                    }) }
+                  ]
+                );
             })
             .catch(function (error) {
                 console.log(error);
+                Alert.alert(
+                  "Fehlgeschlagen",
+                  error,
+                  [
+                    
+                    { text: "OK", onPress: () => console.log("OK Pressed") }
+                  ]
+                );
+                
             });
 
 
     }
 
-
+*/
 
     return (
         <View>
@@ -178,9 +198,27 @@ const CheckOutConfirm = ({ navigation, route }) => {
             .then(function (response) {
                 console.log(JSON.stringify(response.data));
                 console.log("check out message", response.data.messages)
+                //alert("Response", response.data.messages)
+                Alert.alert(
+                  "Erfolgreich",
+                  response.data.messages,
+                  [
+                    
+                    { text: "OK", onPress: () => navigation.push('Home', {
+                    }) }
+                  ]
+                );
             })
             .catch(function (error) {
                 console.log(error);
+                Alert.alert(
+                  "Fehlgeschlagen",
+                  response.data.messages,
+                  [
+                    
+                    { text: "OK", onPress: () => console.log("OK Pressed") }
+                  ]
+                );
             });
 
             }}
@@ -226,15 +264,21 @@ const CheckOutConfirm = ({ navigation, route }) => {
       onChangeText={onChangeText}
       value={text}
     />
-            <Button
-                title="Confirm & Check Out"
-                onPress={() => CheckOutConfirmFunction()}
-            />
+
 <Button
-                title="console all users"
-                onPress={() => GetAllUsers()}
-               
+            onPress={() => navigation.navigate('Home')}
+          icon={
+            <Icon
+              name="arrow-right"
+              size={40}
+              color="white"
             />
+          }
+          iconRight
+          title="Home Menü"
+        />
+           
+
 
         </View>
     );

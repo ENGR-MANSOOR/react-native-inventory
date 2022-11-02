@@ -1,6 +1,7 @@
 import {  Image, View, Dimensions, StyleSheet, TouchableOpacity } from "react-native";
 import { Text, Input, Icon, Button } from '@rneui/themed';
 import React from "react"
+
 import TextInput from "react-native-input-validator";
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -52,8 +53,9 @@ function CheckInSearch({ navigation }) {
         iconContainerStyle={{ marginLeft: 10, marginRight: -10 }}
       />
      
-
+     
     </View>
+    
 
   );
 }

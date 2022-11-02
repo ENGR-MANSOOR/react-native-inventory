@@ -185,7 +185,7 @@ console.log("Datev is here", datev)
         }
             icon={
               <Icon
-                name="code"
+                name="arrow-right"
                 color="#ffffff"
                 iconStyle={{ marginRight: 10 }}
               />

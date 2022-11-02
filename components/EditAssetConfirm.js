@@ -42,9 +42,26 @@ var config = {
 axios(config)
 .then(function (response) {
   console.log(JSON.stringify(response.data));
+  Alert.alert(
+    "Erfolgreich",
+    response.data.messages,
+    [
+      
+      { text: "OK", onPress: () => navigation.push('Home', {
+      }) }
+    ]
+  );
 })
 .catch(function (error) {
   console.log(error);
+  Alert.alert(
+    "Fehlgeschlagen",
+    error,
+    [
+      
+      { text: "OK", onPress: () => console.log("OK Pressed") }
+    ]
+  );
 });
 
   }

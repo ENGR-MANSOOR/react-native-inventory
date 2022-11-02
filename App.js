@@ -6,7 +6,7 @@ import { Divider, Button } from '@rneui/themed';
 import axios from 'axios';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Test from "./components/Test"
+import CreateNewAsset from "./components/Test"
 import SearchDetails from "./components/SearchDetails.js"
 import DataDetails from './components/DataDetails';
 import CheckInSearch from './components/CheckInSearch.js';
@@ -73,7 +73,7 @@ function HomeScreen({ navigation }) {
 
         <Divider width={15} />
         <Button
-          onPress={() => navigation.navigate('Test')}
+          onPress={() => navigation.navigate('CreateNewAsset')}
           icon={
             <Icon
               name="arrow-right"
@@ -82,7 +82,7 @@ function HomeScreen({ navigation }) {
             />
           }
           iconRight
-          title="Test Page"
+          title="Neues Asset erstellen"
         />
 
         <Divider width={15} />
@@ -141,7 +141,7 @@ const YourApp = () => {
         <Stack.Screen name="SearchDetails" component={SearchDetails} />
         <Stack.Screen name="DataDetails" component={DataDetails} />
         <Stack.Screen name="CheckInSearch" component={CheckInSearch} />
-        <Stack.Screen name="Test" component={Test} />
+        <Stack.Screen name="CreateNewAsset" component={CreateNewAsset} />
         <Stack.Screen name="CheckIn" component={CheckIn} />
         <Stack.Screen name="CheckInConfirm" component={CheckInConfirm} />
         <Stack.Screen name="CheckOutSearch" component={CheckOutSearch} />
