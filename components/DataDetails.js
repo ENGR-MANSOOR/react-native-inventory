@@ -40,19 +40,18 @@ const DataDetails = ({ route }) => {
       .then((response) => {
         // If request is good...
         console.log("date from dyanmic", response.data);
-        setNote(response.data.notes)
-        setDatev(response.data.custom_fields.Datev_Nummer.value)
-        setCheckNumber(response.data.custom_fields.Pruefnummer_Elektrogeraete.value)
         setName(response.data.name)
-        setSerial(response.data.serial)
-        setCreatedAt(response.data.created_at.formatted)
         setAssetTag(response.data.asset_tag)
-        setModelNumber(response.data.model_number)
-        setImage(response.data.image)
-        console.log("date from image", response.data.image);
+        setSerial(response.data.serial)
         setModelID(response.data.model.id)
         setModelName(response.data.model.name)
+        setModelNumber(response.data.model_number)
+        setNote(response.data.notes)
+        setImage(response.data.image)
         setOwnedby(response.data.assigned_to.name)
+        setCreatedAt(response.data.created_at.formatted)
+        setDatev(response.data.custom_fields.Datev_Nummer.value)
+        setCheckNumber(response.data.custom_fields.Pruefnummer_Elektrogeraete.value)
         
         console.log("setNote", response.data.notes )
       })

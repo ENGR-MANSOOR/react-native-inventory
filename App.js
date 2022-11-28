@@ -23,6 +23,10 @@ import EditAssetSearch from './components/EditAssetSearch';
 import EditAssetDetails from './components/EditAssetDetails';
 import EditAssetConfirm from './components/EditAssetConfirm';
 
+
+
+
+
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, padding: 24 }}>

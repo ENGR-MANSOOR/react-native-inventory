@@ -2,7 +2,7 @@ import {  Image, View, Dimensions, StyleSheet, TouchableOpacity } from "react-na
 import { Text, Input, Icon, Button } from '@rneui/themed';
 import React from "react"
 
-import TextInput from "react-native-input-validator";
+
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -13,6 +13,8 @@ const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 function CheckInSearch({ navigation }) {
   const [number, onChangeNumber] = React.useState(null);
 
+ 
+
   return (
 
     <View style={{ flex: 1, alignItems: "center"}}>
@@ -21,13 +23,12 @@ function CheckInSearch({ navigation }) {
 
       <Input
         onChangeText={onChangeNumber}
-        value={number}
         placeholder='Labelled Nummer'
       />
 
       <Button
         onPress={() => navigation.push('CheckIn', {
-          number: number
+          number: number 
         })}
         title="CHECK IN"
         iconContainerStyle={{ marginRight: 10 }}

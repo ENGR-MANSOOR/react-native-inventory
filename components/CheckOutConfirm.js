@@ -23,10 +23,10 @@ const CheckOutConfirm = ({ navigation, route }) => {
       console.log("SEARCH url",config.url)
       axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data.rows[0].name));
+       // console.log(JSON.stringify(response.data.rows[0].name));
         ///////// All Users //////////////
 
-       console.log("Data for flat list",response.data.rows[1].name)
+       //console.log("Data for flat list",response.data.rows[1].name)
         //console.log("before flat list just",response.data.rows)
        //let result = response.data.rows.map(a => a.name);
         //console.log("only name list ",result)
@@ -176,6 +176,7 @@ const CheckOutConfirm = ({ navigation, route }) => {
         <View>
         <SearchableDropdown
             onItemSelect={(item) => {
+              alert("hello")
               console.log("name",item)
               const InputIdforCheckOut = item.id;
               console.log("InputIdforCheckOut",InputIdforCheckOut)
