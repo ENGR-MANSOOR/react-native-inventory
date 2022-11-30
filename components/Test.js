@@ -207,6 +207,10 @@ console.log("json input data", data)
     console.log("url", config.url)
     axios(config)
       .then(function (response) {
+        if(response.data.messages.serial){
+        alert("Seriennummer schon Vorhanden, Bitte versuchen Sie es mit einer anderen Seriennummer");
+        }
+        else{
         console.log(JSON.stringify(response.data.messages));
         console.log(JSON.stringify(response.data));
         Alert.alert(
@@ -220,10 +224,11 @@ console.log("json input data", data)
             }
           ]
         );
+        }
       })
       .catch(function (error) {
-        console.log(error);
-        Alert.alert(
+        alert("hello")
+        alert(
           "Fehlgeschlagen",
           error,
           [
