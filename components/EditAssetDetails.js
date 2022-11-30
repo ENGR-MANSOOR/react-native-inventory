@@ -172,7 +172,7 @@ console.log("image", Image)
         </Text>
           <Button
            onPress={() =>
-          navigation.navigate('EditAssetConfirm', { assetTag, Ownedby })
+          navigation.navigate('EditAssetConfirm', { assetTag, Ownedby, name, serial, datev, checkNumber, note })
         }
             icon={
               <Icon

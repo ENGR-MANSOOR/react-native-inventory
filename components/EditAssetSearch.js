@@ -24,9 +24,16 @@ function EditAssetSearch({ navigation }) {
       />
 
       <Button
-        onPress={() => navigation.push('EditAssetDetails', {
+        onPress={() => {
+          if(!number){
+           alert("Fehlende Eingabe")
+          }
+          else{
+          navigation.push('EditAssetDetails', {
           number: number
-        })}
+        })
+        }
+        }}
         title="Edit Asset Details"
         iconContainerStyle={{ marginRight: 10 }}
         titleStyle={{ fontWeight: '700' }}

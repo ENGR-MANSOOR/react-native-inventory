@@ -21,9 +21,16 @@ function CheckOutSearch({ navigation }) {
         placeholder='Labelled Nummer'
       />
       <Button
-        onPress={() => navigation.push('CheckOut', {
+        onPress={() =>{ 
+          if(!number){
+           alert("Fehlende Eingabe")
+          }
+          else{
+        navigation.push('CheckOut', {
           number: number
-        })}
+        })
+          }
+        }}
         title="CHECK OUT"
         iconContainerStyle={{ marginRight: 10 }}
         titleStyle={{ fontWeight: '700' }}

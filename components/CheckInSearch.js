@@ -27,9 +27,16 @@ function CheckInSearch({ navigation }) {
       />
 
       <Button
-        onPress={() => navigation.push('CheckIn', {
+        onPress={() => {
+          if(!number){
+           alert("Fehlende Eingabe")
+          }
+          else{
+          navigation.push('CheckIn', {
           number: number 
-        })}
+        })
+          }
+        }}
         title="CHECK IN"
         iconContainerStyle={{ marginRight: 10 }}
         titleStyle={{ fontWeight: '700' }}
