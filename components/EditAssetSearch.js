@@ -1,10 +1,9 @@
 import { TextInput, Image, View, Dimensions, StyleSheet, TouchableOpacity } from "react-native";
 import { Text, Input, Icon, Button, Card } from '@rneui/themed';
 import React from "react"
+import AlertBox, { hideAlert, showAlert } from 'react-native-easy-alert';
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ScreenContainer } from "react-native-screens";
+
 
 const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
@@ -28,7 +27,17 @@ function EditAssetSearch({ navigation }) {
       <Button
         onPress={() => {
           if(!number){
-           alert("Fehlende Eingabe")
+            showAlert({
+            titleParam: 'Fehlende Eingabe',
+            bodyParam: 'Do you want to close me?',
+            buttonsParam: [
+              {
+                backgroundColor: 'green',
+                text: 'Erneut Versuchen',
+                onPressAction: () => hideAlert(),
+              },
+            ],
+          })
           }
           else{
           navigation.push('EditAssetDetails', {
@@ -37,7 +46,6 @@ function EditAssetSearch({ navigation }) {
         }
         }}
         title="Edit Asset Details"
-        iconContainerStyle={{ marginRight: 10 }}
         titleStyle={{ fontWeight: '700' }}
         buttonStyle={{
           backgroundColor: '#1E90FF',
@@ -59,6 +67,7 @@ function EditAssetSearch({ navigation }) {
         iconRight
         iconContainerStyle={{ marginLeft: 10, marginRight: -10 }}
       />
+       <AlertBox />
      </Card>
 
     </View>
@@ -81,7 +90,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   subHeader: {
-    color: "blue",
+    color: "#17A8E3",
     textAlign: "center",
     paddingVertical: 10
   }

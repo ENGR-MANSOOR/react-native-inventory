@@ -261,53 +261,53 @@ const CreateNewAsset = ({ navigation }) => {
         nestedScrollEnabled={true}
         keyboardShouldPersistTaps={'handled'}>
         <View>
- {barcode == null ? (
-        <RNCamera
-          style={styles.rnCamera}
+          {barcode == null ? (
+            <RNCamera
+              style={styles.rnCamera}
 
 
-          autoFocus={RNCamera.Constants.AutoFocus.on}
-          type={RNCamera.Constants.Type.back}
-          googleVisionBarcodeType={RNCamera.Constants.GoogleVisionBarcodeDetection.BarcodeType.ALL} r
-          //onBarCodeRead={setBarcode}
-          //onBarCodeRead={(data) => console.log("data",data.data)} 
-          onBarCodeRead={(data) => setBarcode(data.data)}>
-          <BarcodeMask
-            lineAnimationDuration={1000}
-            width="100%"
-            height="100%"
-            outerMaskOpacity={0.4}
-            backgroundColor="#eee"
-            edgeColor={'#fff'}
-            edgeBorderWidth={4}
-            edgeHeight={25}
-            edgeWidth={25}
-            edgeRadius={5}
-            animatedLineColor={'#0097AB'}
-            animatedLineThickness={3}
-            animatedLineOrientation="horizontal"
+              autoFocus={RNCamera.Constants.AutoFocus.on}
+              type={RNCamera.Constants.Type.back}
+              googleVisionBarcodeType={RNCamera.Constants.GoogleVisionBarcodeDetection.BarcodeType.ALL} r
+              //onBarCodeRead={setBarcode}
+              //onBarCodeRead={(data) => console.log("data",data.data)} 
+              onBarCodeRead={(data) => setBarcode(data.data)}>
+              <BarcodeMask
+                lineAnimationDuration={1000}
+                width="100%"
+                height="100%"
+                outerMaskOpacity={0.4}
+                backgroundColor="#eee"
+                edgeColor={'#fff'}
+                edgeBorderWidth={4}
+                edgeHeight={25}
+                edgeWidth={25}
+                edgeRadius={5}
+                animatedLineColor={'#0097AB'}
+                animatedLineThickness={3}
+                animatedLineOrientation="horizontal"
 
 
 
-          />
-        </RNCamera>
+              />
+            </RNCamera>
 
-      ) : (
-        <View style={[styles.rnCamera, styles.rmCameraResult]}>
-          <Text style={styles.rmCameraResultText}>{setBarcode.data}</Text>
+          ) : (
+            <View style={[styles.rnCamera, styles.rmCameraResult]}>
+              <Text style={styles.rmCameraResultText}>{setBarcode.data}</Text>
 
-        </View>
-
-
-      )}
+            </View>
 
 
-      <View style={styles.cameraControl}>
-        <TouchableOpacity style={styles.btn} onPress={() => setBarcode()}>
-          <Text style={styles.btnText}>New QR Scan</Text>
-        </TouchableOpacity>
-        <Text>{barcode}</Text>
-      </View>
+          )}
+
+
+          <View style={styles.cameraControl}>
+            <TouchableOpacity style={styles.btn} onPress={() => setBarcode()}>
+              <Text style={styles.btnText}>New QR Scan</Text>
+            </TouchableOpacity>
+            <Text>{barcode}</Text>
+          </View>
 
           <Fumi
             value={barcode}
@@ -332,7 +332,6 @@ const CreateNewAsset = ({ navigation }) => {
 
               //items.push(item)
               (setSelectedItems(item.id));
-              alert(SelectedItems);
               (setSelectedItemsText(item.name));
 
             }}
@@ -366,7 +365,7 @@ const CreateNewAsset = ({ navigation }) => {
                   borderColor: '#ccc',
                   borderRadius: 5,
                 },
-                onTextChange: text => alert(text)
+                onTextChange: text => (text)
               }
             }
             listProps={
@@ -386,7 +385,6 @@ const CreateNewAsset = ({ navigation }) => {
 
               //items.push(item)
               (setSelectedStatus(item.id));
-              alert(SelectedStatus);
               (setSelectedStatusText(item.name));
 
             }}
@@ -406,32 +404,38 @@ const CreateNewAsset = ({ navigation }) => {
               backgroundColor: '#FAF7F6',
             }}
             itemStyle={{
-              //single dropdown item style
               padding: 10,
               marginTop: 2,
-              backgroundColor: '#FAF9F8',
+              backgroundColor: '#ddd',
               borderColor: '#bbb',
               borderWidth: 1,
+              borderRadius: 5,
             }}
-            itemTextStyle={{
-              //text style of a single dropdown item
-              color: '#222',
-            }}
-            itemsContainerStyle={{
-              //items container style you can pass maxHeight
-              //to restrict the items dropdown hieght
-              maxHeight: '60%',
-            }}
+            itemTextStyle={{ color: '#222' }}
+            itemsContainerStyle={{ maxHeight: 140 }}
             items={StatusResult}
-            //mapping of item array
             defaultIndex={2}
-            //default selected item index
-            placeholder="Status"
-            //place holder for the search input
+            chip={true}
             resetValue={false}
-            //reset textInput Value with true and false state
-            underlineColorAndroid="transparent"
-          //To remove the underline from the android input
+            textInputProps={
+              {
+                placeholder: "Bitte Status auswählen",
+                placeholderTextColor: "#080808",
+                underlineColorAndroid: "transparent",
+                style: {
+                  padding: 12,
+                  borderWidth: 1,
+                  borderColor: '#ccc',
+                  borderRadius: 5,
+                },
+                onTextChange: text => alert(text)
+              }
+            }
+            listProps={
+              {
+                nestedScrollEnabled: true,
+              }
+            }
           />
 
           <Text style={styles.dropdownInput}>{SelectedStatusText}</Text>
@@ -446,7 +450,6 @@ const CreateNewAsset = ({ navigation }) => {
 
               //items.push(item)
               (setSelectedSupplier(item.id));
-              alert(SelectedSupplier);
               (setSelectSupplierText(item.name));
 
             }}
@@ -466,33 +469,38 @@ const CreateNewAsset = ({ navigation }) => {
               backgroundColor: '#FAF7F6',
             }}
             itemStyle={{
-              //single dropdown item style
               padding: 10,
               marginTop: 2,
-              backgroundColor: '#FAF9F8',
+              backgroundColor: '#ddd',
               borderColor: '#bbb',
               borderWidth: 1,
+              borderRadius: 5,
             }}
-            itemTextStyle={{
-              //text style of a single dropdown item
-              color: '#222',
-            }}
-            itemsContainerStyle={{
-              //items container style you can pass maxHeight
-              //to restrict the items dropdown hieght
-              maxHeight: '60%',
-            }}
+            itemTextStyle={{ color: '#222' }}
+            itemsContainerStyle={{ maxHeight: 140 }}
             items={SupplierResult}
-            //mapping of item array
             defaultIndex={2}
-            //default selected item index
-            placeholder="Supplier"
-            //place holder for the search input
+            chip={true}
             resetValue={false}
-            //reset textInput Value with true and false state
-            underlineColorAndroid="transparent"
-            //To remove the underline from the android input
-            listOptionProps={{ nestedScrollEnabled: true }}
+            textInputProps={
+              {
+                placeholder: "Bitte Lieferant auswählen",
+                placeholderTextColor: "#080808",
+                underlineColorAndroid: "transparent",
+                style: {
+                  padding: 12,
+                  borderWidth: 1,
+                  borderColor: '#ccc',
+                  borderRadius: 5,
+                },
+                onTextChange: text => alert(text)
+              }
+            }
+            listProps={
+              {
+                nestedScrollEnabled: true,
+              }
+            }
           />
 
           <Text style={styles.dropdownInput}>{SelectSupplierText}</Text>

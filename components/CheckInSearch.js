@@ -1,6 +1,7 @@
-import {  Image, View, Dimensions, StyleSheet, TouchableOpacity } from "react-native";
+import {  Image, View, Dimensions, StyleSheet, TouchableOpacity,Modal } from "react-native";
 import {Text, Input,Card, Icon, Button } from '@rneui/themed';
 import React from "react"
+import AlertBox, { hideAlert, showAlert } from 'react-native-easy-alert';
 
 
 const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
@@ -22,11 +23,22 @@ function CheckInSearch({ navigation }) {
         onChangeText={onChangeNumber}
         placeholder='Labelled Nummer'
       />
-
+     
       <Button
         onPress={() => {
           if(!number){
-           alert("Fehlende Eingabe")
+           //alert("")
+           showAlert({
+            titleParam: 'Fehlende Eingabe',
+            bodyParam: 'Do you want to close me?',
+            buttonsParam: [
+              {
+                backgroundColor: 'green',
+                text: 'Erneut Versuchen',
+                onPressAction: () => hideAlert(),
+              },
+            ],
+          })
           }
           else{
           navigation.push('CheckIn', {
@@ -35,7 +47,6 @@ function CheckInSearch({ navigation }) {
           }
         }}
         title="CHECK IN"
-        iconContainerStyle={{ marginRight: 10 }}
         titleStyle={{ fontWeight: '700' }}
         buttonStyle={{
           backgroundColor: '#1E90FF',
@@ -57,7 +68,9 @@ function CheckInSearch({ navigation }) {
         iconRight
         iconContainerStyle={{ marginLeft: 10, marginRight: -10 }}
       />
-     
+    
+     <AlertBox />
+    
      </Card>
     </View>
 
