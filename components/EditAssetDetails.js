@@ -99,12 +99,20 @@ console.log("image", Image)
         <Card>
           <Card.Title>Details</Card.Title>
           <Card.Divider />
-          <Card.Image
-            style={{ padding: 0 }}
-            source={{
-              uri: Image,
-            }}
-          />
+          <View style={{
+              margin: 2,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+              <Card.Image
+                style={{
+                  padding: 0, width: 100, height: 100,
+                }}
+                source={{
+                  uri: Image,
+                }}
+              />
+            </View>
           
 
           <Text style={style.subHeader}>

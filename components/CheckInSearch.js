@@ -1,12 +1,7 @@
 import {  Image, View, Dimensions, StyleSheet, TouchableOpacity } from "react-native";
-import { Text, Input, Icon, Button } from '@rneui/themed';
+import {Text, Input,Card, Icon, Button } from '@rneui/themed';
 import React from "react"
 
-
-
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ScreenContainer } from "react-native-screens";
 
 const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
@@ -16,10 +11,12 @@ function CheckInSearch({ navigation }) {
  
 
   return (
-
-    <View style={{ flex: 1, alignItems: "center"}}>
+    
+    <View >
+    <Card>
+          <Card.Title>Check In</Card.Title>
       <Text style={styles.subHeader} h3>Bitte schreiben Sie die beschriftete Nummer auf, um den Bestand zu überprüfen.</Text>
-     
+      
 
       <Input
         onChangeText={onChangeNumber}
@@ -61,9 +58,9 @@ function CheckInSearch({ navigation }) {
         iconContainerStyle={{ marginLeft: 10, marginRight: -10 }}
       />
      
-     
+     </Card>
     </View>
-    
+
 
   );
 }
@@ -83,6 +80,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   subHeader: {
+    color: "#17A8E3",
+    textAlign: "center",
+    paddingVertical: 10
+  },
+  Error: {
     color: "blue",
     textAlign: "center",
     paddingVertical: 10

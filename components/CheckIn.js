@@ -22,7 +22,7 @@ const CheckIn = ({ route }) => {
   const [datev, setDatev] = React.useState("");
   const [checkNumber, setCheckNumber] = React.useState("");
   const [note, setNote] = React.useState("");
-  
+
 
 
   const handleSubmit = async (number) => {
@@ -43,7 +43,7 @@ const CheckIn = ({ route }) => {
         // If request is good...
         //console.log("date from dyanmic in checkin.js", response.data);
         console.log("data from dyanmic in checkin.js now", response.data);
-        
+
         setName(response.data.name)
         setAssetTag(response.data.asset_tag)
         setSerial(response.data.serial)
@@ -62,8 +62,8 @@ const CheckIn = ({ route }) => {
       });
 
   };
-console.log("image", Image)
-console.log("Datev is here", datev)
+  console.log("image", Image)
+  console.log("Datev is here", datev)
 
 
   /*const CheckInPost = async (number) => {
@@ -97,104 +97,111 @@ console.log("Datev is here", datev)
     <View>
       <View>
 
-      <ScrollView>
-        <Card>
-          <Card.Title>Details</Card.Title>
-          <Card.Divider />
-          <Card.Image
-            style={{ padding: 0 }}
-            source={{
-              uri: Image,
-            }}
-          />
-          
-
-          <Text style={style.subHeader}>
-            Name:
-          </Text>
-          <Text> {name} </Text>
-          <Text style={style.subHeader}>
-          Serial Number:
-        </Text>
-        <Text> {serial} </Text>
-        <Text style={style.subHeader}>
-          Created At:
-        </Text>
-        <Text>
-          {createdAt}
-        </Text>
-        <Text style={style.subHeader}>
-          Asset Tag:
-        </Text>
-        <Text>
-          {assetTag}
-        </Text>
-        <Text style={style.subHeader}>
-          Model Number:
-        </Text>
-        <Text>
-          {modelNumber}
-        </Text>
-        
-        <Text style={style.subHeader}>
-          Model with ID :
-        </Text>
-        <Text>
-          {modelID}
-        </Text>
-        <Text style={style.subHeader}>
-          Model with Name :
-        </Text>
-        <Text>
-          {modelName}
-        </Text>
-        <Text style={style.subHeader}>
-          Owned By :
-        </Text>
-        <Text>
-          {Ownedby}
-        </Text>
-        <Text style={style.subHeader}>
-         Datev_Nummer :
-        </Text>
-        <Text>
-          {datev}
-        </Text>
-        <Text style={style.subHeader}>
-        Pruefnummer_Elektrogeraete :
-        </Text>
-        <Text>
-          {checkNumber}
-        </Text>
-        <Text style={style.subHeader}>
-        Note :
-        </Text>
-        <Text>
-          {note}
-        </Text>
-          <Button
-           onPress={() =>
-          navigation.navigate('CheckInConfirm', { assetTag, Ownedby })
-        }
-            icon={
-              <Icon
-                name="arrow-right"
-                color="#ffffff"
-                iconStyle={{ marginRight: 10 }}
+        <ScrollView>
+          <Card>
+            <Card.Title>Details</Card.Title>
+            <Card.Divider />
+            <View style={{
+              margin: 2,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+              <Card.Image
+                style={{
+                  padding: 0, width: 100, height: 100,
+                }}
+                source={{
+                  uri: Image,
+                }}
               />
-            }
-            buttonStyle={{
-              borderRadius: 0,
-              marginLeft: 0,
-              marginRight: 0,
-              marginBottom: 0,
-            }}
-            title="CHECK IN"
-          />
-        </Card>
+            </View>
+
+            <Text style={style.subHeader}>
+              Name:
+            </Text>
+            <Text> {name} </Text>
+            <Text style={style.subHeader}>
+              Serial Number:
+            </Text>
+            <Text> {serial} </Text>
+            <Text style={style.subHeader}>
+              Created At:
+            </Text>
+            <Text>
+              {createdAt}
+            </Text>
+            <Text style={style.subHeader}>
+              Asset Tag:
+            </Text>
+            <Text>
+              {assetTag}
+            </Text>
+            <Text style={style.subHeader}>
+              Model Number:
+            </Text>
+            <Text>
+              {modelNumber}
+            </Text>
+
+            <Text style={style.subHeader}>
+              Model with ID :
+            </Text>
+            <Text>
+              {modelID}
+            </Text>
+            <Text style={style.subHeader}>
+              Model with Name :
+            </Text>
+            <Text>
+              {modelName}
+            </Text>
+            <Text style={style.subHeader}>
+              Owned By :
+            </Text>
+            <Text>
+              {Ownedby}
+            </Text>
+            <Text style={style.subHeader}>
+              Datev_Nummer :
+            </Text>
+            <Text>
+              {datev}
+            </Text>
+            <Text style={style.subHeader}>
+              Pruefnummer_Elektrogeraete :
+            </Text>
+            <Text>
+              {checkNumber}
+            </Text>
+            <Text style={style.subHeader}>
+              Note :
+            </Text>
+            <Text>
+              {note}
+            </Text>
+            <Button
+              onPress={() =>
+                navigation.navigate('CheckInConfirm', { assetTag, Ownedby })
+              }
+              icon={
+                <Icon
+                  name="arrow-right"
+                  color="#ffffff"
+                  iconStyle={{ marginRight: 10 }}
+                />
+              }
+              buttonStyle={{
+                borderRadius: 0,
+                marginLeft: 0,
+                marginRight: 0,
+                marginBottom: 0,
+              }}
+              title="CHECK IN"
+            />
+          </Card>
         </ScrollView>
       </View>
-      
+
 
     </View>
   );

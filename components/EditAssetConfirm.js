@@ -79,7 +79,7 @@ const EditAssetConfirm = ({ event, navigation, route }) => {
     <View>
       <ScrollView>
         <Card>
-          <Text>This is {route.params.Ownedby}'s profile</Text>
+          <Text>Das ist {route.params.Ownedby}'s profile</Text>
           <Text style={style.subHeader}>
             Name :
           </Text>

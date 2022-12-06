@@ -1,5 +1,6 @@
 import React from "react";
 import { Alert,TextInput, Text, Image, View, Dimensions, StyleSheet, TouchableOpacity, Button } from "react-native";
+import {Card} from '@rneui/themed';
 
 const CheckInConfirm = ({ navigation, route }) => {
 
@@ -63,13 +64,15 @@ const CheckInConfirm = ({ navigation, route }) => {
 
   return (
     <View>
+     <Card>
+          <Card.Title>Check In Bestätigen</Card.Title>
       <Text>This is {route.params.Ownedby}'s profile</Text>
       <Button
         title="Confirm & Check In"
         onPress={() => CheckInConfirmFunction()}
       />
 
-
+</Card>
     </View>
   );
 

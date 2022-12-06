@@ -1,19 +1,16 @@
 import {  TextInput, Image, View, Dimensions, StyleSheet, TouchableOpacity } from "react-native";
-import { Text, Input, Icon, Button } from '@rneui/themed';
+import { Text, Input, Icon, Button, Card } from '@rneui/themed';
 import React from "react"
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ScreenContainer } from "react-native-screens";
-
-const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
 function SearchDetails({ navigation }) {
   const [number, onChangeNumber] = React.useState(null);  
 
   return (
     
-    <View style={{ flex: 1, alignItems: "center"}}>
+    <View >
+    <Card>
+          <Card.Title>Check In</Card.Title>
       <Text style={styles.subHeader} h3>Bitte schreiben Sie die beschriftete Nummer auf, um den Bestand zu überprüfen.</Text>
       <Input
         onChangeText={onChangeNumber}
@@ -54,7 +51,7 @@ function SearchDetails({ navigation }) {
         iconRight
         iconContainerStyle={{ marginLeft: 10, marginRight: -10 }}
       />
-    
+    </Card>
 </View>
    
   );
