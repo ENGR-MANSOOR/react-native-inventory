@@ -7,7 +7,6 @@ import AlertBox, { hideAlert, showAlert } from 'react-native-easy-alert';
 import { RNCamera } from 'react-native-camera'
 import BarcodeMask from 'react-native-barcode-mask';
 
-const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
 function CheckOutSearch({ navigation }) {
   const [number, onChangeNumber] = React.useState(null);
@@ -67,7 +66,7 @@ function CheckOutSearch({ navigation }) {
         <View style={styles.row}>
           <TouchableOpacity
             onPress={() => {
-              if ((!number) || (number.length > 3)) {
+              if ((!number) ) {
                 showAlert({
                   titleParam: 'Fehlende Eingabe',
                   bodyParam: 'Do you want to close me?',

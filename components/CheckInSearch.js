@@ -73,7 +73,7 @@ function CheckInSearch({ navigation }) {
 <View style={styles.row}>
         <TouchableOpacity 
           onPress={() => {
-            if ((!number)||(number.length>3)) {
+            if ((!number)) {
               //alert("")
               showAlert({
                 titleParam: 'Ob keine Eingabe oder ungültige Eingabe',
