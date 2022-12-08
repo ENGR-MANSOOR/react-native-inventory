@@ -1,7 +1,7 @@
 import { View, Dimensions, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
-import { Text, Input, Card, Button } from '@rneui/themed';
+import { Text, Input, Card } from '@rneui/themed';
 import React from "react"
-import AlertBox, { hideAlert, showAlert } from 'react-native-easy-alert';
+import AlertBox, { showAlert } from 'react-native-easy-alert';
 
 import { RNCamera } from 'react-native-camera'
 import BarcodeMask from 'react-native-barcode-mask';

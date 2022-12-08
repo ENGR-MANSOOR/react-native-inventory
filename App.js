@@ -91,7 +91,7 @@ function HomeScreen({ navigation }) {
 
         <Divider width={15} />
         <Button
-            onPress={() => navigation.navigate('EditAssetSearch')}
+          onPress={() => navigation.navigate('EditAssetSearch')}
           icon={
             <Icon
               name="arrow-right"
@@ -121,41 +121,23 @@ function HomeScreen({ navigation }) {
 const Stack = createNativeStackNavigator();
 
 const YourApp = () => {
-  /*
-  var test = 'snipeit-test'
-  //var prod = 'vminventar.schnupp.de'
-  
-    const USER_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMzhmMTYwMDhlMGQ2NDZlNzQxMDAzMGQxNTM3ZWI1MWU2MmIzZDk3NzVlZmU1OTZlMTZiMzA3YWM3Y2Y2NDNkY2ZkYTIxZTJmNjdmOTgyMzQiLCJpYXQiOjE2NjE0MjYxNjEsIm5iZiI6MTY2MTQyNjE2MSwiZXhwIjoyMTM0ODExNzYwLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.pWF14zSaBslu3FFTRXPFosJkN1y-cERRwljZNYCPbg3jRCOgThVz0dldLVehu9tDNllzi6jQqhplcN5HlpIWuz0Jp__5JUKXBNrU782JqZadoChuxRNILAkzT7EJwOXuOtjS9Ij0zO5GMfKUc01I5RsDqD2ljcaQFFt_Mjn0lE6OGopj64JBl921BoS05i_TEty2n6kPxkWlQVt3HNGhs-f_RlHMaBlWQpOTf5_oFowjD3SwtH2ERw_E_oJIpS_RH_5fCbeRDvTZYr4tCPzRUYXoA4q4-hEpTH9newbKxATzwhZ9IB-9UXsnwVfe8owuY79okYkrTo4KYj2ynk1Se6tCT0tdwaqNwqYDzwzS3P3jmmneUmCrwXeyinX05KtIslK02e6q_Zud9Q7NSJq58hTy86HDIlMX2shhagVqZ0UchhSUbeCaM8Kc27zLC54KIJE_R25izBACw0wZLVYp2-OU9rgSK0OPl33DZ8VykHQtyXTVArV1bUoJxZHZqcpnUKmb2cG90K83CYZJFQ3rI_bPRfH1aIdqDM8MYAfDwxgtRBzp8tPF5uMUSKAifbFHMpC-Si90sF0uvVpYaKg9Ag8rqLXSQdFESwDim6149VFCzSJES9hh_X0S738PRShSCQDK-wJXN7M5-vP-XxezoB07ZGxpJJzeo9lAiyLC58Q'
-    const AuthStr = 'Bearer '.concat(USER_TOKEN);
-    console.log('AuthStr', AuthStr)
-    axios.get('http://test/api/v1/hardware/725', { headers: { Authorization: AuthStr, Accept: 'application/json', "Content-Type": 'application/json' } })
-      .then(response => {
-        // If request is good...
-        console.log("APP CONSOLE",response.data);
-      })
-      .catch((error) => {
-        console.log('error produced' + error);
-      });*/
-
   return (
 
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="SearchDetails" component={SearchDetails} />
-        <Stack.Screen name="DataDetails" component={DataDetails} />
-        <Stack.Screen name="CheckInSearch" component={CheckInSearch} />
-        <Stack.Screen name="CreateNewAsset" component={CreateNewAsset} />
-        <Stack.Screen name="CheckIn" component={CheckIn} />
-        <Stack.Screen name="CheckInConfirm" component={CheckInConfirm} />
-        <Stack.Screen name="CheckOutSearch" component={CheckOutSearch} />
-        <Stack.Screen name="CheckOut" component={CheckOut} />
-        <Stack.Screen name="CheckOutConfirm" component={CheckOutConfirm} />
-        <Stack.Screen name="EditAssetSearch" component={EditAssetSearch} />
-        <Stack.Screen name="EditAssetDetails" component={EditAssetDetails} />
-        <Stack.Screen name="EditAssetConfirm" component={EditAssetConfirm} />
-        
-
+        <Stack.Screen name="Home" options={{ title: 'Startseite' }} component={HomeScreen} />
+        <Stack.Screen name="SearchDetails" options={{ title: 'Asset Details' }} component={SearchDetails} />
+        <Stack.Screen name="DataDetails" options={{ title: 'Asset Details' }} component={DataDetails} />
+        <Stack.Screen name="CheckInSearch" options={{ title: 'Check In' }} component={CheckInSearch} />
+        <Stack.Screen name="CreateNewAsset" options={{ title: 'Neue Asset' }} component={CreateNewAsset} />
+        <Stack.Screen name="CheckIn" options={{ title: 'Check In' }} component={CheckIn} />
+        <Stack.Screen name="CheckInConfirm" options={{ title: 'Check In' }} component={CheckInConfirm} />
+        <Stack.Screen name="CheckOutSearch" options={{ title: 'Check Out' }} component={CheckOutSearch} />
+        <Stack.Screen name="CheckOut" options={{ title: 'Check Out' }} component={CheckOut} />
+        <Stack.Screen name="CheckOutConfirm" options={{ title: 'Check Out' }} component={CheckOutConfirm} />
+        <Stack.Screen name="EditAssetSearch" options={{ title: 'Edit Asset' }} component={EditAssetSearch} />
+        <Stack.Screen name="EditAssetDetails" options={{ title: 'Edit Asset' }} component={EditAssetDetails} />
+        <Stack.Screen name="EditAssetConfirm" options={{ title: 'Edit Asset' }} component={EditAssetConfirm} />
       </Stack.Navigator>
     </NavigationContainer>
 
