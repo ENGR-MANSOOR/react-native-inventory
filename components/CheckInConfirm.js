@@ -1,6 +1,6 @@
 import React from "react";
-import { Alert,TextInput, Text, Image, View, Dimensions, StyleSheet, TouchableOpacity, Button } from "react-native";
-import {Card} from '@rneui/themed';
+import { Alert,  Text,  View, Button } from "react-native";
+import { Card } from '@rneui/themed';
 
 const CheckInConfirm = ({ navigation, route }) => {
 
@@ -35,9 +35,11 @@ const CheckInConfirm = ({ navigation, route }) => {
           "Erfolgreich",
           response.data.messages,
           [
-            
-            { text: "OK", onPress: () => navigation.push('Home', {
-            }) }
+
+            {
+              text: "OK", onPress: () => navigation.push('Home', {
+              })
+            }
           ]
         );
         console.log(JSON.stringify(response.data));
@@ -48,9 +50,11 @@ const CheckInConfirm = ({ navigation, route }) => {
           "Fehlgeschlagen",
           error,
           [
-            
-            { text: "OK", onPress: () => navigation.push('Home', {
-            }) }
+
+            {
+              text: "OK", onPress: () => navigation.push('Home', {
+              })
+            }
           ]
         );
       });
@@ -64,15 +68,15 @@ const CheckInConfirm = ({ navigation, route }) => {
 
   return (
     <View>
-     <Card>
-          <Card.Title>Check In Bestätigen</Card.Title>
-      <Text>This is {route.params.Ownedby}'s profile</Text>
-      <Button
-        title="Confirm & Check In"
-        onPress={() => CheckInConfirmFunction()}
-      />
+      <Card>
+        <Card.Title>Check In Bestätigen</Card.Title>
+        <Text>This is {route.params.Ownedby}'s profile</Text>
+        <Button
+          title="Confirm & Check In"
+          onPress={() => CheckInConfirmFunction()}
+        />
 
-</Card>
+      </Card>
     </View>
   );
 

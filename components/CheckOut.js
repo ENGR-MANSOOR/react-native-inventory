@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {  TextInput, ScrollView, View, Dimensions, StyleSheet, TouchableOpacity } from "react-native";
+import { ScrollView, View, Dimensions, StyleSheet, TouchableOpacity } from "react-native";
 import { Text, Card, Button, Image } from '@rneui/themed';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
@@ -18,7 +18,7 @@ const CheckOut = ({ route }) => {
   const [datev, setDatev] = React.useState("");
   const [checkNumber, setCheckNumber] = React.useState("");
   const [note, setNote] = React.useState("");
-  
+
 
 
 
@@ -29,7 +29,7 @@ const CheckOut = ({ route }) => {
     const AuthStr = "Bearer ".concat(USER_TOKEN);
     console.log("AuthStr", AuthStr);
     axios
-      .get(`http://vmadmin01.schnupp.de//api/v1/hardware/${number}` &&  `http://vmadmin01.schnupp.de//api/v1/hardware/${filtered_barcode}`, {
+      .get(`http://vmadmin01.schnupp.de//api/v1/hardware/${number}` && `http://vmadmin01.schnupp.de//api/v1/hardware/${filtered_barcode}`, {
         headers: {
           Authorization: AuthStr,
           Accept: "application/json",
@@ -51,7 +51,7 @@ const CheckOut = ({ route }) => {
         setCreatedAt(response.data.created_at.formatted)
         setDatev(response.data.custom_fields.Datev_Nummer.value)
         setCheckNumber(response.data.custom_fields.Pruefnummer_Elektrogeraete.value)
-        
+
       })
       .catch((error) => {
         console.log("error produced kabeer" + error);
@@ -69,19 +69,19 @@ const CheckOut = ({ route }) => {
     console.log('BarCode after filter', filtered_barcode)
     console.log('name', name)
     if (number) {
-       handleSubmit(number, filtered_barcode)
+      handleSubmit(number, filtered_barcode)
     }
-// add a loader here
+    // add a loader here
   }, []);
   const navigation = useNavigation();
   return (
     <View>
       <View>
-      <ScrollView>
-        <Card>
-          <Card.Title>Details</Card.Title>
-          <Card.Divider />
-          <View style={{
+        <ScrollView>
+          <Card>
+            <Card.Title>Details</Card.Title>
+            <Card.Divider />
+            <View style={{
               margin: 2,
               justifyContent: 'center',
               alignItems: 'center'
@@ -96,98 +96,98 @@ const CheckOut = ({ route }) => {
               />
             </View>
 
-          <Text style={style.subHeader}>
-            Name:
-          </Text>
-          <Text> {name} </Text>
-          <Text style={style.subHeader}>
-          Serial Number:
-        </Text>
-        <Text> {serial} </Text>
-        <Text style={style.subHeader}>
-          Created At:
-        </Text>
-        <Text>
-          {createdAt}
-        </Text>
-        <Text style={style.subHeader}>
-          Asset Tag:
-        </Text>
-        <Text>
-          {assetTag}
-        </Text>
-        <Text style={style.subHeader}>
-          Model Number:
-        </Text>
-        <Text>
-          {modelNumber}
-        </Text>
-        
-        <Text style={style.subHeader}>
-          Model with ID :
-        </Text>
-        <Text>
-          {modelID}
-        </Text>
-        <Text style={style.subHeader}>
-          Model with Name :
-        </Text>
-        <Text>
-          {modelName}
-        </Text>
-        <Text style={style.subHeader}>
-          Owned By :
-        </Text>
-        <Text>
-          {Ownedby}
-        </Text>
-        <Text style={style.subHeader}>
-         Datev_Nummer :
-        </Text>
-        <Text>
-          {datev}
-        </Text>
-        <Text style={style.subHeader}>
-        Pruefnummer_Elektrogeraete :
-        </Text>
-        <Text>
-          {checkNumber}
-        </Text>
-        <Text style={style.subHeader}>
-        Note :
-        </Text>
-        <Text>
-          {note}
-        </Text>
-          <Button
-          onPress={() =>
-          navigation.navigate('CheckOutConfirm',  {Ownedby, assetTag} )
-        }
-            icon={
-              <Icon
-                name="arrow-right"
-                color="#ffffff"
-                iconStyle={{ marginRight: 10 }}
-              />
-            }
-            buttonStyle={{
-              borderRadius: 0,
-              marginLeft: 0,
-              marginRight: 0,
-              marginBottom: 0,
-            }}
-            title="CHECK OUT"
-          />
-        </Card>
+            <Text style={style.subHeader}>
+              Name:
+            </Text>
+            <Text> {name} </Text>
+            <Text style={style.subHeader}>
+              Serial Number:
+            </Text>
+            <Text> {serial} </Text>
+            <Text style={style.subHeader}>
+              Created At:
+            </Text>
+            <Text>
+              {createdAt}
+            </Text>
+            <Text style={style.subHeader}>
+              Asset Tag:
+            </Text>
+            <Text>
+              {assetTag}
+            </Text>
+            <Text style={style.subHeader}>
+              Model Number:
+            </Text>
+            <Text>
+              {modelNumber}
+            </Text>
+
+            <Text style={style.subHeader}>
+              Model with ID :
+            </Text>
+            <Text>
+              {modelID}
+            </Text>
+            <Text style={style.subHeader}>
+              Model with Name :
+            </Text>
+            <Text>
+              {modelName}
+            </Text>
+            <Text style={style.subHeader}>
+              Owned By :
+            </Text>
+            <Text>
+              {Ownedby}
+            </Text>
+            <Text style={style.subHeader}>
+              Datev_Nummer :
+            </Text>
+            <Text>
+              {datev}
+            </Text>
+            <Text style={style.subHeader}>
+              Pruefnummer_Elektrogeraete :
+            </Text>
+            <Text>
+              {checkNumber}
+            </Text>
+            <Text style={style.subHeader}>
+              Note :
+            </Text>
+            <Text>
+              {note}
+            </Text>
+            <Button
+              onPress={() =>
+                navigation.navigate('CheckOutConfirm', { Ownedby, assetTag })
+              }
+              icon={
+                <Icon
+                  name="arrow-right"
+                  color="#ffffff"
+                  iconStyle={{ marginRight: 10 }}
+                />
+              }
+              buttonStyle={{
+                borderRadius: 0,
+                marginLeft: 0,
+                marginRight: 0,
+                marginBottom: 0,
+              }}
+              title="CHECK OUT"
+            />
+          </Card>
         </ScrollView>
       </View>
     </View>
   );
 };
 
-const deviceWidth= Math.round(Dimensions.get('window').width);
+const deviceWidth = Math.round(Dimensions.get('window').width);
 const style = StyleSheet.create({
-  cardContainer: { width: deviceWidth, backgroundColor: '#a29bfe'},
+  cardContainer: { width: deviceWidth, backgroundColor: '#a29bfe' },
 
   ImageBackground: {
     width: "50%",

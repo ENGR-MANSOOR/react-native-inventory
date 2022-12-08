@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, ScrollView, StyleSheet, Image, Button, Alert, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native';
-import { ViewPropTypes } from 'deprecated-react-native-prop-types'
+import { Text, ScrollView, StyleSheet, Image, Button, Alert, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native';
+
 
 import { Akira } from 'react-native-textinput-effects';
 import { Fumi } from 'react-native-textinput-effects';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-//import BarcodeScanner from "paraboly/react-native-barcode-scanner";
+
 
 import SearchableDropdown from 'react-native-searchable-dropdown';
 
-import { Camera } from 'expo-camera';
 import { RNCamera } from 'react-native-camera'
 import BarcodeMask from 'react-native-barcode-mask';
-
-
-
 
 
 var axios = require('axios');
@@ -46,18 +42,16 @@ const CreateNewAsset = ({ navigation }) => {
 
 
   const [Serial, setSerial] = React.useState("");
-  //const [model, setModel] = React.useState("");
-  // const [status, setStatus] = React.useState("");
+
   const [name, setName] = React.useState("");
   const [purchaseDate, setPurchaseDate] = React.useState("");
-  //const [supplier, setSupplier] = React.useState("");
+
   const [order, setOrder] = React.useState("");
   const [purchaseCost, setPurchaseCost] = React.useState("");
   const [warranty, setWarranty] = React.useState("");
   const [note, setNote] = React.useState("");
-  console.log("serial numer in effects", Serial)
-  console.log("model", SelectedSupplier)
-  //console.log("status", status)
+  console.log("serial numer in effects", Serial);
+  console.log("model", SelectedSupplier);
 
 
 
@@ -74,13 +68,7 @@ const CreateNewAsset = ({ navigation }) => {
     console.log("SEARCH url", config.url)
     axios(config)
       .then(function (response) {
-        // console.log(JSON.stringify(response.data.rows[0].name));
-        ///////// All Users //////////////
 
-        //console.log("Data for flat list",response.data.rows[1].name)
-        //console.log("before flat list just",response.data.rows)
-        //let result = response.data.rows.map(a => a.name);
-        //console.log("only name list ",result)
         let result = response.data.rows.map(({ name, id }) => ({ name, id }))
 
 
@@ -107,13 +95,7 @@ const CreateNewAsset = ({ navigation }) => {
     console.log("SEARCH url", config.url)
     axios(config)
       .then(function (response) {
-        // console.log(JSON.stringify(response.data.rows[0].name));
-        ///////// All Users //////////////
 
-        //console.log("Data for flat list",response.data.rows[1].name)
-        //console.log("before flat list just",response.data.rows)
-        //let result = response.data.rows.map(a => a.name);
-        //console.log("only name list ",result)
         let statusResult = response.data.rows.map(({ name, id }) => ({ name, id }))
 
 
@@ -140,11 +122,8 @@ const CreateNewAsset = ({ navigation }) => {
     console.log("SEARCH url", config.url)
     axios(config)
       .then(function (response) {
-        // console.log(JSON.stringify(response.data.rows[0].name));
         ///////// All Users //////////////
-
         //console.log("Data for flat list",response.data.rows[1].name)
-        //console.log("before flat list just",response.data.rows)
         //let result = response.data.rows.map(a => a.name);
         //console.log("only name list ",result)
         let supplierResult = response.data.rows.map(({ name, id }) => ({ name, id }))
@@ -260,324 +239,320 @@ const CreateNewAsset = ({ navigation }) => {
       <ScrollView
         nestedScrollEnabled={false}
         keyboardShouldPersistTaps={'handled'}>
-       
-          {barcode == "clicked" ? (
-            <RNCamera
-              style={styles.rnCamera}
+
+        {barcode == "" ? (
+          <RNCamera
+            style={styles.rnCamera}
 
 
-              autoFocus={RNCamera.Constants.AutoFocus.on}
-              type={RNCamera.Constants.Type.back}
-              googleVisionBarcodeType={RNCamera.Constants.GoogleVisionBarcodeDetection.BarcodeType.ALL}
-              //onBarCodeRead={setBarcode}
-              //onBarCodeRead={(data) => console.log("data",data.data)} 
-              onBarCodeRead={(data) => setBarcode(data.data)}>
-              <BarcodeMask
-                lineAnimationDuration={1000}
-                width="100%"
-                height="100%"
-                outerMaskOpacity={0.4}
-                backgroundColor="#eee"
-                edgeColor={'#fff'}
-                edgeBorderWidth={4}
-                edgeHeight={10}
-                edgeWidth={10}
-                edgeRadius={5}
-                animatedLineColor={'#0097AB'}
-                animatedLineThickness={3}
-                animatedLineOrientation="horizontal"
+            autoFocus={RNCamera.Constants.AutoFocus.on}
+            type={RNCamera.Constants.Type.back}
+            googleVisionBarcodeType={RNCamera.Constants.GoogleVisionBarcodeDetection.BarcodeType.ALL}
+            //onBarCodeRead={setBarcode}
+            //onBarCodeRead={(data) => console.log("data",data.data)} 
+            onBarCodeRead={(data) => setBarcode(data.data)}>
+            <BarcodeMask
+              lineAnimationDuration={1000}
+              width="100%"
+              height="100%"
+              outerMaskOpacity={0.4}
+              backgroundColor="#eee"
+              edgeColor={'#fff'}
+              edgeBorderWidth={4}
+              edgeHeight={10}
+              edgeWidth={10}
+              edgeRadius={5}
+              animatedLineColor={'#0097AB'}
+              animatedLineThickness={3}
+              animatedLineOrientation="horizontal"
 
 
 
-              />
-            </RNCamera>
+            />
+          </RNCamera>
 
-          ) : (
-            <SafeAreaView style={[styles.rnCamera, styles.rmCameraResult]}>
-              <Text style={styles.rmCameraResultText}>{setBarcode.data}</Text>
+        ) : (
+          <SafeAreaView style={[styles.rnCamera, styles.rmCameraResult]}>
+            <Text style={styles.rmCameraResultText}>{setBarcode.data}</Text>
 
-            </SafeAreaView>
-
-
-          )}
-
-
-          <SafeAreaView style={styles.cameraControl}>
-            <TouchableOpacity style={styles.btn} onPress={() => setBarcode("clicked")}>
-              <Text style={styles.btnText}>QR Scan</Text>
-            </TouchableOpacity>
-            <Text>{barcode}</Text>
           </SafeAreaView>
 
-          <Fumi
-            value={barcode}
-            onChangeText={setBarcode}
-            iconClass={FontAwesomeIcon}
-            iconName={'barcode'}
-            iconColor={'#f95a25'}
-            iconSize={20}
-            iconWidth={40}
-            inputPadding={16}
-            textColor={'#f95a25'}
+
+        )}
 
 
-          />
-          {SerialError.length > 0 &&
-            <Text style={styles.ErrorValidation}>{SerialError}</Text>
+        <SafeAreaView style={styles.cameraControl}>
+          <TouchableOpacity style={styles.btn} onPress={() => setBarcode("")}>
+            <Text style={styles.btnText}>QR Scan</Text>
+          </TouchableOpacity>
+          <Text>{barcode}</Text>
+        </SafeAreaView>
+
+        <Fumi
+          value={barcode}
+          onChangeText={setBarcode}
+          iconClass={FontAwesomeIcon}
+          iconName={'barcode'}
+          iconColor={'#f95a25'}
+          iconSize={20}
+          iconWidth={40}
+          inputPadding={16}
+          textColor={'#f95a25'}
+
+
+        />
+        {SerialError.length > 0 &&
+          <Text style={styles.ErrorValidation}>{SerialError}</Text>
+        }
+        <SearchableDropdown
+          multi={true}
+          SelectedItems={SelectedItems}
+          onItemSelect={(item) => {
+
+            //items.push(item)
+            (setSelectedItems(item.id));
+            (setSelectedItemsText(item.name));
+
+          }}
+          containerStyle={{ padding: 5 }}
+          onRemoveItem={(item, index) => {
+            const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
+            this.setState({ selectedItems: items });
+          }}
+          itemStyle={{
+            padding: 10,
+            marginTop: 2,
+            backgroundColor: '#ddd',
+            borderColor: '#bbb',
+            borderWidth: 1,
+            borderRadius: 5,
+          }}
+          itemTextStyle={{ color: '#222' }}
+          itemsContainerStyle={{ maxHeight: 140 }}
+          items={serverData}
+          defaultIndex={2}
+          chip={true}
+          resetValue={false}
+          textInputProps={
+            {
+              placeholder: "Bitte Modelle auswählen",
+              placeholderTextColor: "#080808",
+              underlineColorAndroid: "transparent",
+              style: {
+                padding: 12,
+                borderWidth: 1,
+                borderColor: '#ccc',
+                borderRadius: 5,
+              },
+              onTextChange: text => (text)
+            }
           }
-          <SearchableDropdown
-            multi={true}
-            SelectedItems={SelectedItems}
-            onItemSelect={(item) => {
-
-              //items.push(item)
-              (setSelectedItems(item.id));
-              (setSelectedItemsText(item.name));
-
-            }}
-            containerStyle={{ padding: 5 }}
-            onRemoveItem={(item, index) => {
-              const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
-              this.setState({ selectedItems: items });
-            }}
-            itemStyle={{
-              padding: 10,
-              marginTop: 2,
-              backgroundColor: '#ddd',
-              borderColor: '#bbb',
-              borderWidth: 1,
-              borderRadius: 5,
-            }}
-            itemTextStyle={{ color: '#222' }}
-            itemsContainerStyle={{ maxHeight: 140 }}
-            items={serverData}
-            defaultIndex={2}
-            chip={true}
-            resetValue={false}
-            textInputProps={
-              {
-                placeholder: "Bitte Modelle auswählen",
-                placeholderTextColor: "#080808",
-                underlineColorAndroid: "transparent",
-                style: {
-                  padding: 12,
-                  borderWidth: 1,
-                  borderColor: '#ccc',
-                  borderRadius: 5,
-                },
-                onTextChange: text => (text)
-              }
+          listProps={
+            {
+              nestedScrollEnabled: true,
             }
-            listProps={
-              {
-                nestedScrollEnabled: true,
-              }
+          }
+        />
+        <Text style={styles.dropdownInput}>{SelectedItemsText}</Text>
+        <Text style={styles.ErrorValidation}>{SelectedError}</Text>
+
+        <SearchableDropdown
+          onTextChange={(text) => console.log(text)}
+          SelectedStatus={SelectedStatus}
+
+          onItemSelect={(item) => {
+
+            //items.push(item)
+            (setSelectedStatus(item.id));
+            (setSelectedStatusText(item.name));
+
+          }}
+
+
+
+
+          containerStyle={{ padding: 5 }}
+          //suggestion container style
+          textInputStyle={{
+            //inserted text style
+            padding: 12,
+            borderWidth: 1,
+            borderColor: '#ccc',
+            backgroundColor: '#FAF7F6',
+          }}
+          itemStyle={{
+            padding: 10,
+            marginTop: 2,
+            backgroundColor: '#ddd',
+            borderColor: '#bbb',
+            borderWidth: 1,
+            borderRadius: 5,
+          }}
+          itemTextStyle={{ color: '#222' }}
+          itemsContainerStyle={{ maxHeight: 140 }}
+          items={StatusResult}
+          defaultIndex={2}
+          chip={true}
+          resetValue={false}
+          textInputProps={
+            {
+              placeholder: "Bitte Status auswählen",
+              placeholderTextColor: "#080808",
+              underlineColorAndroid: "transparent",
+              style: {
+                padding: 12,
+                borderWidth: 1,
+                borderColor: '#ccc',
+                borderRadius: 5,
+              },
+              onTextChange: text => alert(text)
             }
-          />
-          <Text style={styles.dropdownInput}>{SelectedItemsText}</Text>
-          <Text style={styles.ErrorValidation}>{SelectedError}</Text>
-
-          <SearchableDropdown
-            onTextChange={(text) => console.log(text)}
-            SelectedStatus={SelectedStatus}
-
-            onItemSelect={(item) => {
-
-              //items.push(item)
-              (setSelectedStatus(item.id));
-              (setSelectedStatusText(item.name));
-
-            }}
-
-
-
-            //On text change listner on the searchable input
-            //onItemSelect={(items) => alert(JSON.stringify(items.id))}
-            //onItemSelect called after the selection from the dropdown
-            containerStyle={{ padding: 5 }}
-            //suggestion container style
-            textInputStyle={{
-              //inserted text style
-              padding: 12,
-              borderWidth: 1,
-              borderColor: '#ccc',
-              backgroundColor: '#FAF7F6',
-            }}
-            itemStyle={{
-              padding: 10,
-              marginTop: 2,
-              backgroundColor: '#ddd',
-              borderColor: '#bbb',
-              borderWidth: 1,
-              borderRadius: 5,
-            }}
-            itemTextStyle={{ color: '#222' }}
-            itemsContainerStyle={{ maxHeight: 140 }}
-            items={StatusResult}
-            defaultIndex={2}
-            chip={true}
-            resetValue={false}
-            textInputProps={
-              {
-                placeholder: "Bitte Status auswählen",
-                placeholderTextColor: "#080808",
-                underlineColorAndroid: "transparent",
-                style: {
-                  padding: 12,
-                  borderWidth: 1,
-                  borderColor: '#ccc',
-                  borderRadius: 5,
-                },
-                onTextChange: text => alert(text)
-              }
+          }
+          listProps={
+            {
+              nestedScrollEnabled: true,
             }
-            listProps={
-              {
-                nestedScrollEnabled: true,
-              }
+          }
+        />
+
+        <Text style={styles.dropdownInput}>{SelectedStatusText}</Text>
+        <Text style={styles.ErrorValidation}>{StatusError}</Text>
+
+
+        <SearchableDropdown
+          onTextChange={(text) => console.log(text)}
+          SelectedSupplier={SelectedSupplier}
+          //onItemSelect={(item) => setSelectSupplier(item.id)}
+          onItemSelect={(item) => {
+
+            //items.push(item)
+            (setSelectedSupplier(item.id));
+            (setSelectSupplierText(item.name));
+
+          }}
+
+
+
+
+          containerStyle={{ padding: 5 }}
+          //suggestion container style
+          textInputStyle={{
+            //inserted text style
+            padding: 12,
+            borderWidth: 1,
+            borderColor: '#ccc',
+            backgroundColor: '#FAF7F6',
+          }}
+          itemStyle={{
+            padding: 10,
+            marginTop: 2,
+            backgroundColor: '#ddd',
+            borderColor: '#bbb',
+            borderWidth: 1,
+            borderRadius: 5,
+          }}
+          itemTextStyle={{ color: '#222' }}
+          itemsContainerStyle={{ maxHeight: 140 }}
+          items={SupplierResult}
+          defaultIndex={2}
+          chip={true}
+          resetValue={false}
+          textInputProps={
+            {
+              placeholder: "Bitte Lieferant auswählen",
+              placeholderTextColor: "#080808",
+              underlineColorAndroid: "transparent",
+              style: {
+                padding: 12,
+                borderWidth: 1,
+                borderColor: '#ccc',
+                borderRadius: 5,
+              },
+              onTextChange: text => alert(text)
             }
-          />
-
-          <Text style={styles.dropdownInput}>{SelectedStatusText}</Text>
-          <Text style={styles.ErrorValidation}>{StatusError}</Text>
-
-
-          <SearchableDropdown
-            onTextChange={(text) => console.log(text)}
-            SelectedSupplier={SelectedSupplier}
-            //onItemSelect={(item) => setSelectSupplier(item.id)}
-            onItemSelect={(item) => {
-
-              //items.push(item)
-              (setSelectedSupplier(item.id));
-              (setSelectSupplierText(item.name));
-
-            }}
-
-
-
-            //On text change listner on the searchable input
-            //onItemSelect={(items) => alert(JSON.stringify(items.id))}
-            //onItemSelect called after the selection from the dropdown
-            containerStyle={{ padding: 5 }}
-            //suggestion container style
-            textInputStyle={{
-              //inserted text style
-              padding: 12,
-              borderWidth: 1,
-              borderColor: '#ccc',
-              backgroundColor: '#FAF7F6',
-            }}
-            itemStyle={{
-              padding: 10,
-              marginTop: 2,
-              backgroundColor: '#ddd',
-              borderColor: '#bbb',
-              borderWidth: 1,
-              borderRadius: 5,
-            }}
-            itemTextStyle={{ color: '#222' }}
-            itemsContainerStyle={{ maxHeight: 140 }}
-            items={SupplierResult}
-            defaultIndex={2}
-            chip={true}
-            resetValue={false}
-            textInputProps={
-              {
-                placeholder: "Bitte Lieferant auswählen",
-                placeholderTextColor: "#080808",
-                underlineColorAndroid: "transparent",
-                style: {
-                  padding: 12,
-                  borderWidth: 1,
-                  borderColor: '#ccc',
-                  borderRadius: 5,
-                },
-                onTextChange: text => alert(text)
-              }
+          }
+          listProps={
+            {
+              nestedScrollEnabled: true,
             }
-            listProps={
-              {
-                nestedScrollEnabled: true,
-              }
-            }
-          />
+          }
+        />
 
-          <Text style={styles.dropdownInput}>{SelectSupplierText}</Text>
-          <Text style={styles.ErrorValidation}>{SupplierError}</Text>
-          <Fumi
-            label={'Asset Name'}
-            value={name}
-            onChangeText={setName}
-            iconClass={FontAwesomeIcon}
-            iconName={'user'}
-            iconColor={'#f95a25'}
-            iconSize={20}
-            iconWidth={40}
-            inputPadding={16}
-          />
-          <Fumi
-            label={'Kaufdatum'}
-            value={purchaseDate}
-            onChangeText={setPurchaseDate}
-            iconClass={FontAwesomeIcon}
-            iconName={'calendar'}
-            iconColor={'#f95a25'}
-            iconSize={20}
-            iconWidth={40}
-            inputPadding={16}
-          />
+        <Text style={styles.dropdownInput}>{SelectSupplierText}</Text>
+        <Text style={styles.ErrorValidation}>{SupplierError}</Text>
+        <Fumi
+          label={'Asset Name'}
+          value={name}
+          onChangeText={setName}
+          iconClass={FontAwesomeIcon}
+          iconName={'user'}
+          iconColor={'#f95a25'}
+          iconSize={20}
+          iconWidth={40}
+          inputPadding={16}
+        />
+        <Fumi
+          label={'Kaufdatum'}
+          value={purchaseDate}
+          onChangeText={setPurchaseDate}
+          iconClass={FontAwesomeIcon}
+          iconName={'calendar'}
+          iconColor={'#f95a25'}
+          iconSize={20}
+          iconWidth={40}
+          inputPadding={16}
+        />
 
 
-          <Fumi
-            label={'Bestellung Nr.'}
-            value={order}
-            onChangeText={setOrder}
-            iconClass={FontAwesomeIcon}
-            iconName={'list-ol'}
-            iconColor={'#f95a25'}
-            iconSize={20}
-            iconWidth={40}
-            inputPadding={16}
-          />
-          <Fumi
-            label={'Einkaufspreis'}
-            value={purchaseCost}
-            onChangeText={setPurchaseCost}
-            iconClass={FontAwesomeIcon}
-            iconName={'money'}
-            iconColor={'#f95a25'}
-            iconSize={20}
-            iconWidth={40}
-            inputPadding={16}
-          />
-          <Fumi
-            label={'Garantie'}
-            value={warranty}
-            onChangeText={setWarranty}
-            iconClass={FontAwesomeIcon}
-            iconName={'certificate'}
-            iconColor={'#f95a25'}
-            iconSize={20}
-            iconWidth={40}
-            inputPadding={16}
-          />
-          <Fumi
-            label={'Notes'}
-            value={note}
-            onChangeText={setNote}
-            iconClass={FontAwesomeIcon}
-            iconName={'sticky-note-o'}
-            iconColor={'#f95a25'}
-            iconSize={20}
-            iconWidth={40}
-            inputPadding={16}
-          />
-          <Button
-            title="Senden"
-            onPress={() => CreateNewAssetConfirmation()}
-          />
-    
+        <Fumi
+          label={'Bestellung Nr.'}
+          value={order}
+          onChangeText={setOrder}
+          iconClass={FontAwesomeIcon}
+          iconName={'list-ol'}
+          iconColor={'#f95a25'}
+          iconSize={20}
+          iconWidth={40}
+          inputPadding={16}
+        />
+        <Fumi
+          label={'Einkaufspreis'}
+          value={purchaseCost}
+          onChangeText={setPurchaseCost}
+          iconClass={FontAwesomeIcon}
+          iconName={'money'}
+          iconColor={'#f95a25'}
+          iconSize={20}
+          iconWidth={40}
+          inputPadding={16}
+        />
+        <Fumi
+          label={'Garantie'}
+          value={warranty}
+          onChangeText={setWarranty}
+          iconClass={FontAwesomeIcon}
+          iconName={'certificate'}
+          iconColor={'#f95a25'}
+          iconSize={20}
+          iconWidth={40}
+          inputPadding={16}
+        />
+        <Fumi
+          label={'Notes'}
+          value={note}
+          onChangeText={setNote}
+          iconClass={FontAwesomeIcon}
+          iconName={'sticky-note-o'}
+          iconColor={'#f95a25'}
+          iconSize={20}
+          iconWidth={40}
+          inputPadding={16}
+        />
+        <Button
+          title="Senden"
+          onPress={() => CreateNewAssetConfirmation()}
+        />
+
       </ScrollView>
     </>
   );

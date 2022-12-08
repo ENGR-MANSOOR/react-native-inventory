@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, TextInput, Image, View, Dimensions, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { Alert, View, Dimensions, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { Text, Input, Card, Icon, Button } from '@rneui/themed';
 var axios = require('axios');
 

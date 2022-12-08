@@ -1,122 +1,120 @@
-import {  TextInput, Image, View, Dimensions, StyleSheet,TouchableOpacity, SafeAreaView } from "react-native";
-import { Text, Input, Icon, Button, Card } from '@rneui/themed';
+import { View, Dimensions, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
+import { Text, Input, Button, Card } from '@rneui/themed';
 import React from "react"
 import AlertBox, { hideAlert, showAlert } from 'react-native-easy-alert';
 
 import { RNCamera } from 'react-native-camera'
 import BarcodeMask from 'react-native-barcode-mask';
 function SearchDetails({ navigation }) {
-  const [number, onChangeNumber] = React.useState(null);  
+  const [number, onChangeNumber] = React.useState(null);
 
   return (
-    
+
     <View >
-    <Card>
-          <Card.Title>Asset Details</Card.Title>
-      <Text style={styles.subHeader} h3>Bitte schreiben Sie die beschriftete Nummer auf, um den Bestand zu überprüfen.</Text>
+      <Card>
+        <Card.Title>Asset Details</Card.Title>
+        <Text style={styles.subHeader} h3>Bitte schreiben Sie die beschriftete Nummer auf, um den Bestand zu überprüfen.</Text>
 
-      {number == "clicked" ? (
-            <RNCamera
-              style={styles.rnCamera}
+        {number == "clicked" ? (
+          <RNCamera
+            style={styles.rnCamera}
 
 
-              autoFocus={RNCamera.Constants.AutoFocus.on}
-              type={RNCamera.Constants.Type.back}
-              googleVisionBarcodeType={RNCamera.Constants.GoogleVisionBarcodeDetection.BarcodeType.ALL}
-              //onBarCodeRead={setBarcode}
-              //onBarCodeRead={(data) => console.log("data",data.data)} 
-              onBarCodeRead={(data) => onChangeNumber(data.data)}>
-              <BarcodeMask
-                lineAnimationDuration={1000}
-                width="100%"
-                height="100%"
-                outerMaskOpacity={0.4}
-                backgroundColor="#eee"
-                edgeColor={'#fff'}
-                edgeBorderWidth={4}
-                edgeHeight={10}
-                edgeWidth={10}
-                edgeRadius={5}
-                animatedLineColor={'#0097AB'}
-                animatedLineThickness={3}
-                animatedLineOrientation="horizontal"
+            autoFocus={RNCamera.Constants.AutoFocus.on}
+            type={RNCamera.Constants.Type.back}
+            googleVisionBarcodeType={RNCamera.Constants.GoogleVisionBarcodeDetection.BarcodeType.ALL}
+            onBarCodeRead={(data) => onChangeNumber(data.data)}>
+            <BarcodeMask
+              lineAnimationDuration={1000}
+              width="100%"
+              height="100%"
+              outerMaskOpacity={0.4}
+              backgroundColor="#eee"
+              edgeColor={'#fff'}
+              edgeBorderWidth={4}
+              edgeHeight={10}
+              edgeWidth={10}
+              edgeRadius={5}
+              animatedLineColor={'#0097AB'}
+              animatedLineThickness={3}
+              animatedLineOrientation="horizontal"
 
 
 
-              />
-            </RNCamera>
+            />
+          </RNCamera>
 
-          ) : (
-            <SafeAreaView style={[styles.rnCamera, styles.rmCameraResult]}>
-              <Text style={styles.rmCameraResultText}>{onChangeNumber.data}</Text>
+        ) : (
+          <SafeAreaView style={[styles.rnCamera, styles.rmCameraResult]}>
+            <Text style={styles.rmCameraResultText}>{onChangeNumber.data}</Text>
 
-            </SafeAreaView>
-
-
-          )}
+          </SafeAreaView>
 
 
-          <SafeAreaView style={styles.cameraControl}>
-            <TouchableOpacity style={styles.btn} onPress={() => onChangeNumber("clicked")}>
-              <Text style={styles.btnText}>QR Scan</Text>
-            </TouchableOpacity>
-            <Text>{number}</Text>
-          </SafeAreaView>  
+        )}
+
+
+        <SafeAreaView style={styles.cameraControl}>
+          <TouchableOpacity style={styles.btn} onPress={() => onChangeNumber("clicked")}>
+            <Text style={styles.btnText}>QR Scan</Text>
+          </TouchableOpacity>
+          <Text>{number}</Text>
+        </SafeAreaView>
 
 
 
-      <Input
-        onChangeText={onChangeNumber}
-        value={number}
-        placeholder='Labelled Nummer'
-      />
-      <Button
-        onPress={() =>{
-          if(!number){
-            showAlert({
-            titleParam: 'Fehlende Eingabe',
-            bodyParam: 'Do you want to close me?',
-            buttonsParam: [
-              {
-                backgroundColor: 'green',
-                text: 'Erneut Versuchen',
-                onPressAction: () => hideAlert(),
-              },
-            ],
-          })
-          }
-          else{
-          navigation.push('DataDetails', {
-          number: number
-        })
-        }
-        }}
-        title="CHECK IN"
-        titleStyle={{ fontWeight: '700' }}
-        buttonStyle={{
-          backgroundColor: '#1E90FF',
-          borderColor: 'transparent',
-          borderWidth: 0,
-          borderRadius: 30,
-        }}
-        containerStyle={{
-          width: 200,
-          marginHorizontal: 50,
-          marginVertical: 10,
-        }}
-        icon={{
-          name: 'arrow-right',
-          type: 'font-awesome',
-          size: 15,
-          color: 'white',
-        }}
-        iconRight
-        iconContainerStyle={{ marginLeft: 10, marginRight: -10 }}
-      />
-      <AlertBox />
-    </Card>
-</View>
-   
+        <Input
+          onChangeText={onChangeNumber}
+          value={number}
+          placeholder='Labelled Nummer'
+        />
+        <Button
+          onPress={() => {
+            if (!number) {
+              showAlert({
+                titleParam: 'Fehlende Eingabe',
+                bodyParam: 'Do you want to close me?',
+                buttonsParam: [
+                  {
+                    backgroundColor: 'green',
+                    text: 'Erneut Versuchen',
+                    onPressAction: () => hideAlert(),
+                  },
+                ],
+              })
+            }
+            else {
+              navigation.push('DataDetails', {
+                number: number
+              })
+            }
+          }}
+          title="CHECK IN"
+          titleStyle={{ fontWeight: '700' }}
+          buttonStyle={{
+            backgroundColor: '#1E90FF',
+            borderColor: 'transparent',
+            borderWidth: 0,
+            borderRadius: 30,
+          }}
+          containerStyle={{
+            width: 200,
+            marginHorizontal: 50,
+            marginVertical: 10,
+          }}
+          icon={{
+            name: 'arrow-right',
+            type: 'font-awesome',
+            size: 15,
+            color: 'white',
+          }}
+          iconRight
+          iconContainerStyle={{ marginLeft: 10, marginRight: -10 }}
+        />
+        <AlertBox />
+      </Card>
+    </View>
+
   );
 }
 
@@ -126,9 +124,9 @@ function SearchDetails({ navigation }) {
 
 
 
-const deviceWidth= Math.round(Dimensions.get('window').width);
+const deviceWidth = Math.round(Dimensions.get('window').width);
 const styles = StyleSheet.create({
-  cardContainer: { width: deviceWidth, backgroundColor: '#a29bfe'},
+  cardContainer: { width: deviceWidth, backgroundColor: '#a29bfe' },
 
   ImageBackground: {
     width: "50%",
