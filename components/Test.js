@@ -258,17 +258,17 @@ const CreateNewAsset = ({ navigation }) => {
   return (
     <>
       <ScrollView
-        nestedScrollEnabled={true}
+        nestedScrollEnabled={false}
         keyboardShouldPersistTaps={'handled'}>
-        <View>
-          {barcode == null ? (
+       
+          {barcode == "clicked" ? (
             <RNCamera
               style={styles.rnCamera}
 
 
               autoFocus={RNCamera.Constants.AutoFocus.on}
               type={RNCamera.Constants.Type.back}
-              googleVisionBarcodeType={RNCamera.Constants.GoogleVisionBarcodeDetection.BarcodeType.ALL} r
+              googleVisionBarcodeType={RNCamera.Constants.GoogleVisionBarcodeDetection.BarcodeType.ALL}
               //onBarCodeRead={setBarcode}
               //onBarCodeRead={(data) => console.log("data",data.data)} 
               onBarCodeRead={(data) => setBarcode(data.data)}>
@@ -280,8 +280,8 @@ const CreateNewAsset = ({ navigation }) => {
                 backgroundColor="#eee"
                 edgeColor={'#fff'}
                 edgeBorderWidth={4}
-                edgeHeight={25}
-                edgeWidth={25}
+                edgeHeight={10}
+                edgeWidth={10}
                 edgeRadius={5}
                 animatedLineColor={'#0097AB'}
                 animatedLineThickness={3}
@@ -293,25 +293,25 @@ const CreateNewAsset = ({ navigation }) => {
             </RNCamera>
 
           ) : (
-            <View style={[styles.rnCamera, styles.rmCameraResult]}>
+            <SafeAreaView style={[styles.rnCamera, styles.rmCameraResult]}>
               <Text style={styles.rmCameraResultText}>{setBarcode.data}</Text>
 
-            </View>
+            </SafeAreaView>
 
 
           )}
 
 
-          <View style={styles.cameraControl}>
-            <TouchableOpacity style={styles.btn} onPress={() => setBarcode()}>
-              <Text style={styles.btnText}>New QR Scan</Text>
+          <SafeAreaView style={styles.cameraControl}>
+            <TouchableOpacity style={styles.btn} onPress={() => setBarcode("clicked")}>
+              <Text style={styles.btnText}>QR Scan</Text>
             </TouchableOpacity>
             <Text>{barcode}</Text>
-          </View>
+          </SafeAreaView>
 
           <Fumi
             value={barcode}
-            //onChangeText={setSerial}
+            onChangeText={setBarcode}
             iconClass={FontAwesomeIcon}
             iconName={'barcode'}
             iconColor={'#f95a25'}
@@ -577,7 +577,7 @@ const CreateNewAsset = ({ navigation }) => {
             title="Senden"
             onPress={() => CreateNewAssetConfirmation()}
           />
-        </View>
+    
       </ScrollView>
     </>
   );

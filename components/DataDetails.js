@@ -20,7 +20,7 @@ const DataDetails = ({ route }) => {
 
 
   
-  const handleSubmit = async (number) => {
+  const handleSubmit = async (number, filtered_barcode) => {
     //const test = 'snipeit-test';
     //const dev = 'vminventar.schnupp.de'
 
@@ -30,7 +30,7 @@ const DataDetails = ({ route }) => {
     const AuthStr = "Bearer ".concat(USER_TOKEN);
     console.log("AuthStr", AuthStr);
     axios
-      .get(`http://vmadmin01.schnupp.de//api/v1/hardware/${number}`, {
+      .get(`http://vmadmin01.schnupp.de//api/v1/hardware/${number}`&&  `http://vmadmin01.schnupp.de//api/v1/hardware/${filtered_barcode}`, {
         headers: {
           Authorization: AuthStr,
           Accept: "application/json",
@@ -93,9 +93,15 @@ const DataDetails = ({ route }) => {
 
   useEffect(async () => {
     const number = route?.params.number
+    var str_barcode = number;
+    var n = str_barcode.lastIndexOf('/');
+    var filtered_barcode = str_barcode.substring(n + 1);
+    console.log('name', name)
+    console.log('BarCode', number)
+    console.log('BarCode after filter', filtered_barcode)
     console.log('name', name)
     if (number) {
-       handleSubmit(number)
+       handleSubmit(number, filtered_barcode)
     }
 // add a loader here
   }, []);
