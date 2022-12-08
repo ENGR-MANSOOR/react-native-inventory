@@ -40,8 +40,8 @@ function CheckInSearch({ navigation }) {
               backgroundColor="#eee"
               edgeColor={'#fff'}
               edgeBorderWidth={4}
-              edgeHeight={10}
-              edgeWidth={10}
+              edgeHeight={25}
+              edgeWidth={25}
               edgeRadius={5}
               animatedLineColor={'#0097AB'}
               animatedLineThickness={3}
@@ -62,12 +62,7 @@ function CheckInSearch({ navigation }) {
         )}
 
 
-        <SafeAreaView style={styles.cameraControl}>
-          <TouchableOpacity style={styles.btn} onPress={() => onChangeNumber("clicked")}>
-            <Text style={styles.btnText}>QR Scan</Text>
-          </TouchableOpacity>
-          <Text>{number}</Text>
-        </SafeAreaView>
+        
 
         <Input
           value={number}
@@ -75,19 +70,19 @@ function CheckInSearch({ navigation }) {
           placeholder='Labelled Nummer'
         />
 
-
-        <Button
+<View style={styles.row}>
+        <TouchableOpacity 
           onPress={() => {
-            if (!number) {
+            if ((!number)||(number.length>3)) {
               //alert("")
               showAlert({
-                titleParam: 'Fehlende Eingabe',
+                titleParam: 'Ob keine Eingabe oder ungültige Eingabe',
                 bodyParam: 'Do you want to close me?',
                 buttonsParam: [
                   {
                     backgroundColor: 'green',
                     text: 'Erneut Versuchen',
-                    onPressAction: () => hideAlert(),
+                    onPressAction: () => onChangeNumber(""),
                   },
                 ],
               })
@@ -98,31 +93,18 @@ function CheckInSearch({ navigation }) {
               })
             }
           }}
-          title="CHECK IN"
-          titleStyle={{ fontWeight: '700' }}
-          buttonStyle={{
-            backgroundColor: '#1E90FF',
-            borderColor: 'transparent',
-            borderWidth: 0,
-            borderRadius: 30,
-          }}
-          containerStyle={{
-            width: 200,
-            marginHorizontal: 50,
-            marginVertical: 10,
-          }}
-          icon={{
-            name: 'arrow-right',
-            type: 'font-awesome',
-            size: 15,
-            color: 'white',
-          }}
-          iconRight
-          iconContainerStyle={{ marginLeft: 10, marginRight: -10 }}
-        />
+          style={styles.btn}
+        ><Text style={styles.btnText}>Check In</Text></TouchableOpacity>
 
+          <TouchableOpacity
+          
+           style={styles.btn} onPress={() => onChangeNumber("clicked")}>
+            <Text style={styles.btnText}>QR Scan</Text>
+          </TouchableOpacity>
+        
+  
         <AlertBox />
-
+</View>
       </Card>
     </View>
 
@@ -170,7 +152,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#62d1bc',
   },
   topBar: {
-    height: 50,
+    height: 10,
     backgroundColor: '#62d1bc',
     alignItems: 'center',
     justifyContent: 'center',
@@ -189,13 +171,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600'
   },
+  row: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent:'space-between'
+  },
   btn: {
     width: 240,
     borderRadius: 4,
     backgroundColor: '#62d1bc',
     paddingHorizontal: 24,
     paddingVertical: 12,
-    marginVertical: 8,
+    marginVertical: 20,
+    
   },
   btnText: {
     fontSize: 18,
@@ -204,7 +192,7 @@ const styles = StyleSheet.create({
   },
   rnCamera: {
     width: '100%',
-    height: "20%",
+    height: "5%",
     alignSelf: 'center',
   },
   rmCameraResult: {
@@ -215,11 +203,6 @@ const styles = StyleSheet.create({
   rmCameraResultText: {
     fontSize: 200,
     color: '#62d1bc'
-  },
-  cameraControl: {
-    height: 180,
-    justifyContent: 'center',
-    alignItems: 'center',
   }
 })
 

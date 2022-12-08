@@ -55,65 +55,44 @@ function EditAssetSearch({ navigation }) {
 
 
         )}
-
-
-        <SafeAreaView style={styles.cameraControl}>
-          <TouchableOpacity style={styles.btn} onPress={() => onChangeNumber("clicked")}>
-            <Text style={styles.btnText}>QR Scan</Text>
-          </TouchableOpacity>
-          <Text>{number}</Text>
-        </SafeAreaView>
-
         <Input
           value={number}
           onChangeText={onChangeNumber}
           placeholder='Labelled Nummer'
         />
 
-        <Button
-          onPress={() => {
-            if (!number) {
-              showAlert({
-                titleParam: 'Fehlende Eingabe',
-                bodyParam: 'Do you want to close me?',
-                buttonsParam: [
-                  {
-                    backgroundColor: 'green',
-                    text: 'Erneut Versuchen',
-                    onPressAction: () => hideAlert(),
-                  },
-                ],
-              })
-            }
-            else {
-              navigation.push('EditAssetDetails', {
-                number: number
-              })
-            }
-          }}
-          title="Edit Asset Details"
-          titleStyle={{ fontWeight: '700' }}
-          buttonStyle={{
-            backgroundColor: '#1E90FF',
-            borderColor: 'transparent',
-            borderWidth: 0,
-            borderRadius: 30,
-          }}
-          containerStyle={{
-            width: 200,
-            marginHorizontal: 50,
-            marginVertical: 10,
-          }}
-          icon={{
-            name: 'arrow-right',
-            type: 'font-awesome',
-            size: 15,
-            color: 'white',
-          }}
-          iconRight
-          iconContainerStyle={{ marginLeft: 10, marginRight: -10 }}
-        />
-        <AlertBox />
+        <View style={styles.row}>
+          <TouchableOpacity
+            onPress={() => {
+              if (!number) {
+                showAlert({
+                  titleParam: 'Fehlende Eingabe',
+                  bodyParam: 'Do you want to close me?',
+                  buttonsParam: [
+                    {
+                      backgroundColor: 'green',
+                      text: 'Erneut Versuchen',
+                      onPressAction: () => hideAlert(),
+                    },
+                  ],
+                })
+              }
+              else {
+                navigation.push('EditAssetDetails', {
+                  number: number
+                })
+              }
+            }}
+            style={styles.btn}
+          ><Text style={styles.btnText}>Check Out</Text></TouchableOpacity>
+
+          <TouchableOpacity
+
+            style={styles.btn} onPress={() => onChangeNumber("clicked")}>
+            <Text style={styles.btnText}>QR Scan</Text>
+          </TouchableOpacity>
+          <AlertBox />
+        </View>
       </Card>
 
     </View>
@@ -177,6 +156,11 @@ const styles = StyleSheet.create({
     color: '#121B0D',
     fontSize: 16,
     fontWeight: '600'
+  },
+  row: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: 'space-between'
   },
   btn: {
     width: 240,

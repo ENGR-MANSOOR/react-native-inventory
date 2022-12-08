@@ -53,22 +53,13 @@ function SearchDetails({ navigation }) {
 
         )}
 
-
-        <SafeAreaView style={styles.cameraControl}>
-          <TouchableOpacity style={styles.btn} onPress={() => onChangeNumber("clicked")}>
-            <Text style={styles.btnText}>QR Scan</Text>
-          </TouchableOpacity>
-          <Text>{number}</Text>
-        </SafeAreaView>
-
-
-
         <Input
           onChangeText={onChangeNumber}
           value={number}
           placeholder='Labelled Nummer'
         />
-        <Button
+        <View style={styles.row}>
+        <TouchableOpacity
           onPress={() => {
             if (!number) {
               showAlert({
@@ -89,29 +80,16 @@ function SearchDetails({ navigation }) {
               })
             }
           }}
-          title="CHECK IN"
-          titleStyle={{ fontWeight: '700' }}
-          buttonStyle={{
-            backgroundColor: '#1E90FF',
-            borderColor: 'transparent',
-            borderWidth: 0,
-            borderRadius: 30,
-          }}
-          containerStyle={{
-            width: 200,
-            marginHorizontal: 50,
-            marginVertical: 10,
-          }}
-          icon={{
-            name: 'arrow-right',
-            type: 'font-awesome',
-            size: 15,
-            color: 'white',
-          }}
-          iconRight
-          iconContainerStyle={{ marginLeft: 10, marginRight: -10 }}
-        />
-        <AlertBox />
+          style={styles.btn}
+          ><Text style={styles.btnText}>Check Out</Text></TouchableOpacity>
+
+          <TouchableOpacity
+
+            style={styles.btn} onPress={() => onChangeNumber("clicked")}>
+            <Text style={styles.btnText}>QR Scan</Text>
+          </TouchableOpacity>
+          <AlertBox />
+        </View>
       </Card>
     </View>
 
@@ -175,6 +153,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600'
   },
+  row: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent:'space-between'
+  },
   btn: {
     width: 240,
     borderRadius: 4,
@@ -202,11 +185,7 @@ const styles = StyleSheet.create({
     fontSize: 200,
     color: '#62d1bc'
   },
-  cameraControl: {
-    height: 180,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
+  
 })
 
 

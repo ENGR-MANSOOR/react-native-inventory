@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, ScrollView, StyleSheet, Image, Button, Alert, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Image, Button, Alert, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native';
 
 
 import { Akira } from 'react-native-textinput-effects';
@@ -236,11 +236,8 @@ const CreateNewAsset = ({ navigation }) => {
 
   return (
     <>
-      <ScrollView
-        nestedScrollEnabled={false}
-        keyboardShouldPersistTaps={'handled'}>
 
-        {barcode == "" ? (
+{barcode == "" ? (
           <RNCamera
             style={styles.rnCamera}
 
@@ -279,14 +276,14 @@ const CreateNewAsset = ({ navigation }) => {
 
 
         )}
+      <ScrollView
+        nestedScrollEnabled={false}
+        keyboardShouldPersistTaps={'handled'}>
 
+       
 
-        <SafeAreaView style={styles.cameraControl}>
-          <TouchableOpacity style={styles.btn} onPress={() => setBarcode("")}>
-            <Text style={styles.btnText}>QR Scan</Text>
-          </TouchableOpacity>
-          <Text>{barcode}</Text>
-        </SafeAreaView>
+<View style={styles.row}>
+        
 
         <Fumi
           value={barcode}
@@ -298,9 +295,14 @@ const CreateNewAsset = ({ navigation }) => {
           iconWidth={40}
           inputPadding={16}
           textColor={'#f95a25'}
-
-
         />
+        <SafeAreaView >
+          <TouchableOpacity style={styles.btn} onPress={() => setBarcode("")}>
+            <Text style={styles.btnText}>QR Scan</Text>
+          </TouchableOpacity>
+          <Text>{barcode}</Text>
+        </SafeAreaView>
+        </View>
         {SerialError.length > 0 &&
           <Text style={styles.ErrorValidation}>{SerialError}</Text>
         }
@@ -596,6 +598,11 @@ const styles = StyleSheet.create({
     color: '#121B0D',
     fontSize: 16,
     fontWeight: '600'
+  },
+  row: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: 'space-between'
   },
   btn: {
     width: 240,
