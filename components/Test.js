@@ -276,9 +276,7 @@ const CreateNewAsset = ({ navigation }) => {
 
 
         )}
-      <ScrollView
-        nestedScrollEnabled={false}
-        keyboardShouldPersistTaps={'handled'}>
+    
 
        
 
@@ -307,6 +305,7 @@ const CreateNewAsset = ({ navigation }) => {
           <Text style={styles.ErrorValidation}>{SerialError}</Text>
         }
         <SearchableDropdown
+     
           multi={true}
           SelectedItems={SelectedItems}
           onItemSelect={(item) => {
@@ -482,6 +481,11 @@ const CreateNewAsset = ({ navigation }) => {
 
         <Text style={styles.dropdownInput}>{SelectSupplierText}</Text>
         <Text style={styles.ErrorValidation}>{SupplierError}</Text>
+
+          <ScrollView
+        nestedScrollEnabled={true}
+        listOptionProps={{nestedScrollEnabled: true}}
+        keyboardShouldPersistTaps={'handled'}>
         <Fumi
           label={'Asset Name'}
           value={name}
