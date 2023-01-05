@@ -1,3 +1,4 @@
+<script src="http://192.168.11.3:8097"></script>
 import React, { useEffect, useState } from 'react';
 import { ScrollView, Input, Text, View, Alert, StyleSheet, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native';
 //import Icon from 'react-native-vector-icons/FontAwesome';
@@ -23,8 +24,38 @@ import EditAssetSearch from './components/EditAssetSearch';
 import EditAssetDetails from './components/EditAssetDetails';
 import EditAssetConfirm from './components/EditAssetConfirm';
 
+import CloneAssetSearch from './components/CloneAssetSearch';
+import CloneAsset from './components/CloneAsset';
+
+import { NetworkInfo } from "react-native-network-info";
+ 
+// Get Local IP
+NetworkInfo.getIPAddress().then(ipAddress => {
+  console.log(ipAddress);
+});
 
 
+console.log("hello world")
+/*
+var request = new XMLHttpRequest();
+request.onreadystatechange = e => {
+  if (request.readyState !== 4) {
+    return;
+  }
+
+  if (request.status === 200) {
+    console.log('success', request.responseText);
+    
+    
+  } else {
+    console.warn('i am error');
+  }
+};
+
+request.open('GET', 'http://vmadmin01.schnupp.de/');
+request.send();
+
+*/
 
 
 function HomeScreen({ navigation }) {
@@ -102,6 +133,19 @@ function HomeScreen({ navigation }) {
           iconRight
           title="Edit Asset"
         />
+<Divider width={15} />
+<Button
+          onPress={() => navigation.navigate('CloneAssetSearch')}
+          icon={
+            <Icon
+              name="content-copy"
+              size={40}
+              color="white"
+            />
+          }
+          iconRight
+          title="Clone Asset"
+        />
 
 
 
@@ -116,33 +160,37 @@ function HomeScreen({ navigation }) {
 
 
 
-
-
 const Stack = createNativeStackNavigator();
-
 const YourApp = () => {
-  return (
+ 
+return (
 
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" options={{ title: 'Startseite' }} component={HomeScreen} />
-        <Stack.Screen name="SearchDetails" options={{ title: 'Asset Details' }} component={SearchDetails} />
-        <Stack.Screen name="DataDetails" options={{ title: 'Asset Details' }} component={DataDetails} />
-        <Stack.Screen name="CheckInSearch" options={{ title: 'Check In' }} component={CheckInSearch} />
-        <Stack.Screen name="CreateNewAsset" options={{ title: 'Neue Asset' }} component={CreateNewAsset} />
-        <Stack.Screen name="CheckIn" options={{ title: 'Check In' }} component={CheckIn} />
-        <Stack.Screen name="CheckInConfirm" options={{ title: 'Check In' }} component={CheckInConfirm} />
-        <Stack.Screen name="CheckOutSearch" options={{ title: 'Check Out' }} component={CheckOutSearch} />
-        <Stack.Screen name="CheckOut" options={{ title: 'Check Out' }} component={CheckOut} />
-        <Stack.Screen name="CheckOutConfirm" options={{ title: 'Check Out' }} component={CheckOutConfirm} />
-        <Stack.Screen name="EditAssetSearch" options={{ title: 'Edit Asset' }} component={EditAssetSearch} />
-        <Stack.Screen name="EditAssetDetails" options={{ title: 'Edit Asset' }} component={EditAssetDetails} />
-        <Stack.Screen name="EditAssetConfirm" options={{ title: 'Edit Asset' }} component={EditAssetConfirm} />
-      </Stack.Navigator>
-    </NavigationContainer>
-
-  );
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" options={{ title: 'Startseite' }} component={HomeScreen} />
+          <Stack.Screen name="SearchDetails" options={{ title: 'Asset Details' }} component={SearchDetails} />
+          <Stack.Screen name="DataDetails" options={{ title: 'Asset Details' }} component={DataDetails} />
+          <Stack.Screen name="CheckInSearch" options={{ title: 'Check In' }} component={CheckInSearch} />
+          <Stack.Screen name="CreateNewAsset" options={{ title: 'Neue Asset' }} component={CreateNewAsset} />
+          <Stack.Screen name="CheckIn" options={{ title: 'Check In' }} component={CheckIn} />
+          <Stack.Screen name="CheckInConfirm" options={{ title: 'Check In' }} component={CheckInConfirm} />
+          <Stack.Screen name="CheckOutSearch" options={{ title: 'Check Out' }} component={CheckOutSearch} />
+          <Stack.Screen name="CheckOut" options={{ title: 'Check Out' }} component={CheckOut} />
+          <Stack.Screen name="CheckOutConfirm" options={{ title: 'Check Out' }} component={CheckOutConfirm} />
+          <Stack.Screen name="EditAssetSearch" options={{ title: 'Edit Asset' }} component={EditAssetSearch} />
+          <Stack.Screen name="EditAssetDetails" options={{ title: 'Edit Asset' }} component={EditAssetDetails} />
+          <Stack.Screen name="EditAssetConfirm" options={{ title: 'Edit Asset' }} component={EditAssetConfirm} />
+          <Stack.Screen name="CloneAssetSearch" options={{ title: 'Clone Asset' }} component={CloneAssetSearch} />
+          <Stack.Screen name="CloneAsset" options={{ title: 'Clone Asset' }} component={CloneAsset} />
+        </Stack.Navigator>
+      </NavigationContainer>
+      
+  
+    );
+  
 };
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

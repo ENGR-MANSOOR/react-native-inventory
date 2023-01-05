@@ -12,6 +12,10 @@ import SearchableDropdown from 'react-native-searchable-dropdown';
 import { RNCamera } from 'react-native-camera'
 import BarcodeMask from 'react-native-barcode-mask';
 
+import DatePicker from '@react-native-community/datetimepicker';
+
+
+
 
 var axios = require('axios');
 
@@ -44,7 +48,7 @@ const CreateNewAsset = ({ navigation }) => {
   const [Serial, setSerial] = React.useState("");
 
   const [name, setName] = React.useState("");
-  const [purchaseDate, setPurchaseDate] = React.useState("");
+
 
   const [order, setOrder] = React.useState("");
   const [purchaseCost, setPurchaseCost] = React.useState("");
@@ -54,7 +58,29 @@ const CreateNewAsset = ({ navigation }) => {
   console.log("model", SelectedSupplier);
 
 
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+  const [title, setTitle] = useState("Datum auswählen");
 
+  const onChange = (selectedDate) => {
+    setShow(Platform.OS === 'ios');
+    const currentDate = selectedDate || date;
+
+    setDate(currentDate);
+
+    let tempDate = new Date(currentDate);
+    let fDate = tempDate.getFullYear() + '-' + (tempDate.getMonth() + 1) + '-' + tempDate.getDate();
+    console.log("fDate", fDate)
+
+    setTitle(fDate.toString())
+    console.log("title", title)
+  }
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  }
 
 
   useEffect(() => {
@@ -145,7 +171,7 @@ const CreateNewAsset = ({ navigation }) => {
 
   const CreateNewAssetConfirmation = async () => {
 
-    var serailValid = false;
+    var serialValid = false;
     if (!SelectedItems) {
       setSelectedError("Bitte Modell wählen!");
     }
@@ -157,10 +183,10 @@ const CreateNewAsset = ({ navigation }) => {
     }
     else {
       setSerialError("submitted")
-      serailValid = true
+      serialValid = true
 
 
-      if (serailValid) {
+      if (serialValid) {
         alert('Serial: ' + barcode);
       }
 
@@ -174,9 +200,9 @@ const CreateNewAsset = ({ navigation }) => {
         "status_id": SelectedStatus,
         "warranty_months": warranty,
         "purchase_cost": purchaseCost,
-        "purchase_date": purchaseDate,
+        "purchase_date": title,
         "supplier_id": SelectedSupplier,
-        "company_id": "1"
+        "company_id": "1",
 
       });
       console.log("json input data", data)
@@ -237,51 +263,51 @@ const CreateNewAsset = ({ navigation }) => {
   return (
     <>
 
-{barcode == "" ? (
-          <RNCamera
-            style={styles.rnCamera}
+      {barcode == "" ? (
+        <RNCamera
+          style={styles.rnCamera}
 
 
-            autoFocus={RNCamera.Constants.AutoFocus.on}
-            type={RNCamera.Constants.Type.back}
-            googleVisionBarcodeType={RNCamera.Constants.GoogleVisionBarcodeDetection.BarcodeType.ALL}
-            //onBarCodeRead={setBarcode}
-            //onBarCodeRead={(data) => console.log("data",data.data)} 
-            onBarCodeRead={(data) => setBarcode(data.data)}>
-            <BarcodeMask
-              lineAnimationDuration={1000}
-              width="100%"
-              height="100%"
-              outerMaskOpacity={0.4}
-              backgroundColor="#eee"
-              edgeColor={'#fff'}
-              edgeBorderWidth={4}
-              edgeHeight={10}
-              edgeWidth={10}
-              edgeRadius={5}
-              animatedLineColor={'#0097AB'}
-              animatedLineThickness={3}
-              animatedLineOrientation="horizontal"
+          autoFocus={RNCamera.Constants.AutoFocus.on}
+          type={RNCamera.Constants.Type.back}
+          googleVisionBarcodeType={RNCamera.Constants.GoogleVisionBarcodeDetection.BarcodeType.ALL}
+          //onBarCodeRead={setBarcode}
+          //onBarCodeRead={(data) => console.log("data",data.data)} 
+          onBarCodeRead={(data) => setBarcode(data.data)}>
+          <BarcodeMask
+            lineAnimationDuration={1000}
+            width="100%"
+            height="100%"
+            outerMaskOpacity={0.4}
+            backgroundColor="#eee"
+            edgeColor={'#fff'}
+            edgeBorderWidth={4}
+            edgeHeight={10}
+            edgeWidth={10}
+            edgeRadius={5}
+            animatedLineColor={'#0097AB'}
+            animatedLineThickness={3}
+            animatedLineOrientation="horizontal"
 
 
 
-            />
-          </RNCamera>
+          />
+        </RNCamera>
 
-        ) : (
-          <SafeAreaView style={[styles.rnCamera, styles.rmCameraResult]}>
-            <Text style={styles.rmCameraResultText}>{setBarcode.data}</Text>
+      ) : (
+        <SafeAreaView style={[styles.rnCamera, styles.rmCameraResult]}>
+          <Text style={styles.rmCameraResultText}>{setBarcode.data}</Text>
 
-          </SafeAreaView>
+        </SafeAreaView>
 
 
-        )}
-    
+      )}
 
-       
 
-<View style={styles.row}>
-        
+
+
+      <View style={styles.row}>
+
 
         <Fumi
           value={barcode}
@@ -300,191 +326,191 @@ const CreateNewAsset = ({ navigation }) => {
           </TouchableOpacity>
           <Text>{barcode}</Text>
         </SafeAreaView>
-        </View>
-        {SerialError.length > 0 &&
-          <Text style={styles.ErrorValidation}>{SerialError}</Text>
+      </View>
+      {SerialError.length > 0 &&
+        <Text style={styles.ErrorValidation}>{SerialError}</Text>
+      }
+      <SearchableDropdown
+
+        multi={true}
+        SelectedItems={SelectedItems}
+        onItemSelect={(item) => {
+
+          //items.push(item)
+          (setSelectedItems(item.id));
+          (setSelectedItemsText(item.name));
+
+        }}
+        containerStyle={{ padding: 5 }}
+        onRemoveItem={(item, index) => {
+          const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
+          this.setState({ selectedItems: items });
+        }}
+        itemStyle={{
+          padding: 10,
+          marginTop: 2,
+          backgroundColor: '#ddd',
+          borderColor: '#bbb',
+          borderWidth: 1,
+          borderRadius: 5,
+        }}
+        itemTextStyle={{ color: '#222' }}
+        itemsContainerStyle={{ maxHeight: 140 }}
+        items={serverData}
+        defaultIndex={2}
+        chip={true}
+        resetValue={false}
+        textInputProps={
+          {
+            placeholder: "Bitte Modelle auswählen",
+            placeholderTextColor: "#080808",
+            underlineColorAndroid: "transparent",
+            style: {
+              padding: 12,
+              borderWidth: 1,
+              borderColor: '#ccc',
+              borderRadius: 5,
+            },
+            onTextChange: text => (text)
+          }
         }
-        <SearchableDropdown
-     
-          multi={true}
-          SelectedItems={SelectedItems}
-          onItemSelect={(item) => {
-
-            //items.push(item)
-            (setSelectedItems(item.id));
-            (setSelectedItemsText(item.name));
-
-          }}
-          containerStyle={{ padding: 5 }}
-          onRemoveItem={(item, index) => {
-            const items = this.state.selectedItems.filter((sitem) => sitem.id !== item.id);
-            this.setState({ selectedItems: items });
-          }}
-          itemStyle={{
-            padding: 10,
-            marginTop: 2,
-            backgroundColor: '#ddd',
-            borderColor: '#bbb',
-            borderWidth: 1,
-            borderRadius: 5,
-          }}
-          itemTextStyle={{ color: '#222' }}
-          itemsContainerStyle={{ maxHeight: 140 }}
-          items={serverData}
-          defaultIndex={2}
-          chip={true}
-          resetValue={false}
-          textInputProps={
-            {
-              placeholder: "Bitte Modelle auswählen",
-              placeholderTextColor: "#080808",
-              underlineColorAndroid: "transparent",
-              style: {
-                padding: 12,
-                borderWidth: 1,
-                borderColor: '#ccc',
-                borderRadius: 5,
-              },
-              onTextChange: text => (text)
-            }
+        listProps={
+          {
+            nestedScrollEnabled: true,
           }
-          listProps={
-            {
-              nestedScrollEnabled: true,
-            }
+        }
+      />
+      <Text style={styles.dropdownInput}>{SelectedItemsText}</Text>
+      <Text style={styles.ErrorValidation}>{SelectedError}</Text>
+
+      <SearchableDropdown
+        onTextChange={(text) => console.log(text)}
+        SelectedStatus={SelectedStatus}
+
+        onItemSelect={(item) => {
+
+          //items.push(item)
+          (setSelectedStatus(item.id));
+          (setSelectedStatusText(item.name));
+
+        }}
+
+
+
+
+        containerStyle={{ padding: 5 }}
+        //suggestion container style
+        textInputStyle={{
+          //inserted text style
+          padding: 12,
+          borderWidth: 1,
+          borderColor: '#ccc',
+          backgroundColor: '#FAF7F6',
+        }}
+        itemStyle={{
+          padding: 10,
+          marginTop: 2,
+          backgroundColor: '#ddd',
+          borderColor: '#bbb',
+          borderWidth: 1,
+          borderRadius: 5,
+        }}
+        itemTextStyle={{ color: '#222' }}
+        itemsContainerStyle={{ maxHeight: 140 }}
+        items={StatusResult}
+        defaultIndex={2}
+        chip={true}
+        resetValue={false}
+        textInputProps={
+          {
+            placeholder: "Bitte Status auswählen",
+            placeholderTextColor: "#080808",
+            underlineColorAndroid: "transparent",
+            style: {
+              padding: 12,
+              borderWidth: 1,
+              borderColor: '#ccc',
+              borderRadius: 5,
+            },
+            onTextChange: text => alert(text)
           }
-        />
-        <Text style={styles.dropdownInput}>{SelectedItemsText}</Text>
-        <Text style={styles.ErrorValidation}>{SelectedError}</Text>
-
-        <SearchableDropdown
-          onTextChange={(text) => console.log(text)}
-          SelectedStatus={SelectedStatus}
-
-          onItemSelect={(item) => {
-
-            //items.push(item)
-            (setSelectedStatus(item.id));
-            (setSelectedStatusText(item.name));
-
-          }}
-
-
-
-
-          containerStyle={{ padding: 5 }}
-          //suggestion container style
-          textInputStyle={{
-            //inserted text style
-            padding: 12,
-            borderWidth: 1,
-            borderColor: '#ccc',
-            backgroundColor: '#FAF7F6',
-          }}
-          itemStyle={{
-            padding: 10,
-            marginTop: 2,
-            backgroundColor: '#ddd',
-            borderColor: '#bbb',
-            borderWidth: 1,
-            borderRadius: 5,
-          }}
-          itemTextStyle={{ color: '#222' }}
-          itemsContainerStyle={{ maxHeight: 140 }}
-          items={StatusResult}
-          defaultIndex={2}
-          chip={true}
-          resetValue={false}
-          textInputProps={
-            {
-              placeholder: "Bitte Status auswählen",
-              placeholderTextColor: "#080808",
-              underlineColorAndroid: "transparent",
-              style: {
-                padding: 12,
-                borderWidth: 1,
-                borderColor: '#ccc',
-                borderRadius: 5,
-              },
-              onTextChange: text => alert(text)
-            }
+        }
+        listProps={
+          {
+            nestedScrollEnabled: true,
           }
-          listProps={
-            {
-              nestedScrollEnabled: true,
-            }
+        }
+      />
+
+      <Text style={styles.dropdownInput}>{SelectedStatusText}</Text>
+      <Text style={styles.ErrorValidation}>{StatusError}</Text>
+
+
+      <SearchableDropdown
+        onTextChange={(text) => console.log(text)}
+        SelectedSupplier={SelectedSupplier}
+        //onItemSelect={(item) => setSelectSupplier(item.id)}
+        onItemSelect={(item) => {
+
+          //items.push(item)
+          (setSelectedSupplier(item.id));
+          (setSelectSupplierText(item.name));
+
+        }}
+
+
+
+
+        containerStyle={{ padding: 5 }}
+        //suggestion container style
+        textInputStyle={{
+          //inserted text style
+          padding: 12,
+          borderWidth: 1,
+          borderColor: '#ccc',
+          backgroundColor: '#FAF7F6',
+        }}
+        itemStyle={{
+          padding: 10,
+          marginTop: 2,
+          backgroundColor: '#ddd',
+          borderColor: '#bbb',
+          borderWidth: 1,
+          borderRadius: 5,
+        }}
+        itemTextStyle={{ color: '#222' }}
+        itemsContainerStyle={{ maxHeight: 140 }}
+        items={SupplierResult}
+        defaultIndex={2}
+        chip={true}
+        resetValue={false}
+        textInputProps={
+          {
+            placeholder: "Bitte Lieferant auswählen",
+            placeholderTextColor: "#080808",
+            underlineColorAndroid: "transparent",
+            style: {
+              padding: 12,
+              borderWidth: 1,
+              borderColor: '#ccc',
+              borderRadius: 5,
+            },
+            onTextChange: text => alert(text)
           }
-        />
-
-        <Text style={styles.dropdownInput}>{SelectedStatusText}</Text>
-        <Text style={styles.ErrorValidation}>{StatusError}</Text>
-
-
-        <SearchableDropdown
-          onTextChange={(text) => console.log(text)}
-          SelectedSupplier={SelectedSupplier}
-          //onItemSelect={(item) => setSelectSupplier(item.id)}
-          onItemSelect={(item) => {
-
-            //items.push(item)
-            (setSelectedSupplier(item.id));
-            (setSelectSupplierText(item.name));
-
-          }}
-
-
-
-
-          containerStyle={{ padding: 5 }}
-          //suggestion container style
-          textInputStyle={{
-            //inserted text style
-            padding: 12,
-            borderWidth: 1,
-            borderColor: '#ccc',
-            backgroundColor: '#FAF7F6',
-          }}
-          itemStyle={{
-            padding: 10,
-            marginTop: 2,
-            backgroundColor: '#ddd',
-            borderColor: '#bbb',
-            borderWidth: 1,
-            borderRadius: 5,
-          }}
-          itemTextStyle={{ color: '#222' }}
-          itemsContainerStyle={{ maxHeight: 140 }}
-          items={SupplierResult}
-          defaultIndex={2}
-          chip={true}
-          resetValue={false}
-          textInputProps={
-            {
-              placeholder: "Bitte Lieferant auswählen",
-              placeholderTextColor: "#080808",
-              underlineColorAndroid: "transparent",
-              style: {
-                padding: 12,
-                borderWidth: 1,
-                borderColor: '#ccc',
-                borderRadius: 5,
-              },
-              onTextChange: text => alert(text)
-            }
+        }
+        listProps={
+          {
+            nestedScrollEnabled: true,
           }
-          listProps={
-            {
-              nestedScrollEnabled: true,
-            }
-          }
-        />
+        }
+      />
 
-        <Text style={styles.dropdownInput}>{SelectSupplierText}</Text>
-        <Text style={styles.ErrorValidation}>{SupplierError}</Text>
+      <Text style={styles.dropdownInput}>{SelectSupplierText}</Text>
+      <Text style={styles.ErrorValidation}>{SupplierError}</Text>
 
-          <ScrollView
+      <ScrollView
         nestedScrollEnabled={true}
-        listOptionProps={{nestedScrollEnabled: true}}
+        listOptionProps={{ nestedScrollEnabled: true }}
         keyboardShouldPersistTaps={'handled'}>
         <Fumi
           label={'Asset Name'}
@@ -497,18 +523,19 @@ const CreateNewAsset = ({ navigation }) => {
           iconWidth={40}
           inputPadding={16}
         />
-        <Fumi
-          label={'Kaufdatum'}
-          value={purchaseDate}
-          onChangeText={setPurchaseDate}
-          iconClass={FontAwesomeIcon}
-          iconName={'calendar'}
-          iconColor={'#f95a25'}
-          iconSize={20}
-          iconWidth={40}
-          inputPadding={16}
-        />
+        <Button
+          onPress={() => showMode('date')}
+          title={title}>
+        </Button>
 
+        {show &&
+          <DatePicker
+            value={date}
+            mode={mode}
+            display='default'
+            onChange={(_, date) => onChange(date)}>
+          </DatePicker>
+        }
 
         <Fumi
           label={'Bestellung Nr.'}
@@ -639,7 +666,23 @@ const styles = StyleSheet.create({
     height: 180,
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#ecf0f1',
+    padding: 8,
+  },
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  datePickerStyle: {
+    width: 200,
+    marginTop: 20,
+  },
 });
 
 

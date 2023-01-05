@@ -1,41 +1,26 @@
 import { View, Dimensions, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
-import { Text, Input, Card, Button } from '@rneui/themed';
+import { Text, Input, Card } from '@rneui/themed';
 import React from "react"
 import AlertBox, { showAlert } from 'react-native-easy-alert';
 
 import { RNCamera } from 'react-native-camera'
 import BarcodeMask from 'react-native-barcode-mask';
 
-import DatePicker from 'react-native-date-picker'
 
 
-
-function CheckInSearch({ navigation }) {
+function CloneAssetSearch({ navigation }) {
   const [number, onChangeNumber] = React.useState(null);
-  const [date, setDate] = React.useState(new Date())
-  const [open, setOpen] = React.useState(false)
-  console.log("date only", date)
+
+
+
 
   return (
 
     <View >
       <Card>
-        <Card.Title>Check In</Card.Title>
+        <Card.Title>Clone Asset</Card.Title>
         <Text style={styles.subHeader} h3>Bitte schreiben Sie die beschriftete Nummer auf, um den Bestand zu überprüfen.</Text>
-        <Button title="Datum" onPress={() => setOpen(true)} />
-      <DatePicker
-        modal
-        mode="date"
-        open={open}
-        date={date}
-        onConfirm={(date) => {
-          setOpen(false)
-          setDate(date)
-        }}
-        onCancel={() => {
-          setOpen(false)
-        }}
-      />
+
         {number == "clicked" ? (
           <RNCamera
             style={styles.rnCamera}
@@ -103,7 +88,7 @@ function CheckInSearch({ navigation }) {
               })
             }
             else {
-              navigation.push('CheckIn', {
+              navigation.push('CloneAsset', {
                 number: number
               })
             }
@@ -222,4 +207,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default CheckInSearch;
+export default CloneAssetSearch;
