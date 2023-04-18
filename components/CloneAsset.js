@@ -335,7 +335,7 @@ const CloneAsset = ({ route }) => {
               value={title}
             />
             <Text style={style.subHeader}>
-              Einkauf Preis:
+              {purchaseCost}
             </Text>
             <Input
               onChangeText={setPurchaseCost}
