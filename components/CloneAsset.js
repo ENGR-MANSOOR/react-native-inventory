@@ -108,6 +108,7 @@ const CloneAsset = ({ route }) => {
         setNote(response.data.notes)
         setImage(response.data.image)
         setOrder(response.data.order_number)
+        setPurchaseCost(response.data.purchase_cost)
         setStatusLabel(response.data.status_label.name)
         setStatus(response.data.status_label.id)
 
@@ -335,7 +336,7 @@ const CloneAsset = ({ route }) => {
               value={title}
             />
             <Text style={style.subHeader}>
-              {purchaseCost}
+              Einkauf Preis
             </Text>
             <Input
               onChangeText={setPurchaseCost}
